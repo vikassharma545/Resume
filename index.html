@@ -1,288 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vikas Sharma | Engineer & AlgoTrader</title>
-    <meta name="description"
-        content="Professional portfolio of Vikas Sharma, an Engineer, AlgoTrader, and Cloud & DevOps Enthusiast.">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vikas Sharma — Quantitative Developer</title>
+  <meta name="description" content="Vikas Sharma — Quantitative Developer building algorithmic trading infrastructure for Indian & US equity/options markets. Author of pyzdata on PyPI." />
+  <meta name="theme-color" content="#0A0A0B" />
+
+  <link rel="canonical" href="https://vikassharma545.github.io/Resume/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikassharma545.github.io/Resume/" />
+  <meta property="og:title" content="Vikas Sharma — Quantitative Developer" />
+  <meta property="og:description" content="Quantitative Developer building algo trading infra for Indian & US equity/options markets. Author of pyzdata on PyPI." />
+  <meta property="og:site_name" content="Vikas Sharma" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Vikas Sharma — Quantitative Developer" />
+  <meta name="twitter:description" content="Quantitative Developer building algo trading infra for Indian & US equity/options markets. Author of pyzdata on PyPI." />
+
+  <!-- Favicon (inline SVG, brand-matched) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0A0B'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='ui-monospace,Menlo,monospace' font-size='30' font-weight='800' fill='%23FFB020'%3Evs%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-    <header id="header">
-        <nav class="container">
-            <a href="#" class="logo">VS.</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact" class="btn-primary">Contact Me</a></li>
-            </ul>
-            <div class="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        <section id="hero">
-            <div class="container hero-content">
-                <div class="hero-text">
-                    <span class="greeting">Hi there, I'm</span>
-                    <h1>Vikas Sharma</h1>
-                    <h2 class="subtitle">Engineer • AlgoTrader • Cloud & DevOps Enthusiast</h2>
-                    <p class="bio">Crafting reliable software, delightful developer experiences, and scalable systems.
-                        Building algo trading systems & cloud-native apps.</p>
-                    <div class="hero-btns">
-                        <a href="#contact" class="btn-primary">Get in Touch</a>
-                        <a href="#experience" class="btn-secondary">View Work</a>
-                    </div>
-                    <div class="social-links">
-                        <a href="https://github.com/vikassharma545" aria-label="GitHub" target="_blank"><i
-                                class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/vikas-sharma-coder" aria-label="LinkedIn"
-                            target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://leetcode.com/u/Vikassharma545" aria-label="LeetCode" target="_blank"><i
-                                class="fas fa-code"></i></a>
-                        <a href="https://www.hackerrank.com/profile/Vikassharma545" aria-label="HackerRank"
-                            target="_blank"><i class="fab fa-hackerrank"></i></a>
-                        <a href="mailto:jnv2252@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="img-wrapper">
-                        <!-- Placeholder for profile image -->
-                        <img src="profile_placeholder.png" alt="Vikas Sharma" id="profile-img">
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- Grain + grid overlay -->
+  <div class="bg-overlay" aria-hidden="true"></div>
 
-        <section id="about" class="section">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>I am an Engineer and AlgoTrader passionate about cloud-native apps and distributed systems.
-                            I'm currently building algo trading systems and learning about quant strategies, the US
-                            Options Market, and AI automation.</p>
-                        <p>Beyond code, I enjoy reading books like <em>Ikigai</em> and <em>Atomic Habits</em>, analyzing
-                            foreign markets, and researching crypto. I'm always open to discussing trading, DevOps, and
-                            distributed systems.</p>
-                        <div class="stats">
-                            <div class="stat-item">
-                                <span class="stat-number">₹400Cr+</span>
-                                <span class="stat-label">Traded via Algo</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">150+</span>
-                                <span class="stat-label">Accounts Managed</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">1k+</span>
-                                <span class="stat-label">Lib Downloads</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <header id="header">
+    <nav class="container">
+      <a href="#top" class="logo">
+        <span class="logo-bracket">[</span>vs<span class="logo-cursor">_</span><span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about"><span class="nav-num">01</span> about</a></li>
+        <li><a href="#work"><span class="nav-num">02</span> work</a></li>
+        <li><a href="#projects"><span class="nav-num">03</span> projects</a></li>
+        <li><a href="#stack"><span class="nav-num">04</span> stack</a></li>
+        <li><a href="#contact" class="btn-primary">get in touch <i class="fa-solid fa-arrow-right"></i></a></li>
+      </ul>
+      <div class="nav-meta">
+        <span class="live-dot"></span>
+        <span id="live-clock">--:--:-- IST</span>
+      </div>
+      <button class="hamburger" aria-label="menu" aria-expanded="false" aria-controls="nav-links" id="hamburger-btn"><i class="fas fa-bars"></i></button>
+    </nav>
+  </header>
 
-        <section id="experience" class="section bg-light">
-            <div class="container">
-                <h2 class="section-title">Featured Projects & Experience</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">Jan 2025 - Present</div>
-                        <div class="timeline-content">
-                            <h3>Strategy Analysis Dashboard</h3>
-                            <h4><a href="https://www.linkedin.com/company/pranjali-growcap-private-limited"
-                                    target="_blank" style="text-decoration: underline;">Pranjali
-                                    Growcap Pvt. Ltd.</a>
-                            </h4>
-                            <p>Real-time Straddle Selling optimizer with interactive heatmaps, advanced filters, and
-                                performance metrics. Built without paid APIs.</p>
-                            <ul class="tags">
-                                <li>Python</li>
-                                <li>Streamlit</li>
-                                <li>Polars</li>
-                                <li>Plotly</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Mar 2022 - Jun 2022</div>
-                        <div class="timeline-content">
-                            <h3>Algo Trading SDK (Zerodha/XTS)</h3>
-                            <h4><a href="https://www.linkedin.com/company/pranjali-growcap-private-limited"
-                                    target="_blank" style="text-decoration: underline;">Pranjali
-                                    Growcap Pvt. Ltd.</a>
-                            </h4>
-                            <p>Developed a 10k+ LOC SDK powering ₹400+ crore trade volume across 150+ accounts with full
-                                RMS checks.</p>
-                            <ul class="tags">
-                                <li>Python</li>
-                                <li>Zerodha API</li>
-                                <li>XTS API</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Dec 2022</div>
-                        <div class="timeline-content">
-                            <h3>Historical Stock Data Downloader</h3>
-                            <h4>Open Source Tool</h4>
-                            <p>Fetches free historical & intraday options data from Zerodha without subscriptions.</p>
-                            <ul class="tags">
-                                <li>Python</li>
-                                <li>Pandas</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <main id="top">
 
-        <section id="education" class="section">
-            <div class="container">
-                <h2 class="section-title">Education</h2>
-                <div class="cards-grid">
-                    <div class="card">
-                        <h3>Bachelor's degree, Computer Science</h3>
-                        <h4>Shaheed Sukhdev College Of Business Studies</h4>
-                        <span class="date">2021 - 2023</span>
-                        <p>Specialized in Computer Science.</p>
-                    </div>
-                    <div class="card">
-                        <h3>High School, Science</h3>
-                        <h4>Jawahar Navodaya Vidyalaya (JNV)</h4>
-                        <span class="date">March 2013 - February 2020</span>
-                        <p>Completed High School education with a focus on Science.</p>
-                    </div>
-                </div>
+    <!-- ============ HERO ============ -->
+    <section id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-text">
+            <div class="hero-preline reveal">
+              <span class="hero-bullet">—</span> currently building at
+              <a href="https://www.linkedin.com/company/pranjali-growcap-private-limited" target="_blank" rel="noopener">Pranjali Growcap</a>
             </div>
-        </section>
 
-        <section id="certifications" class="section bg-light">
-            <div class="container">
-                <h2 class="section-title">Certifications</h2>
-                <div class="skills-grid">
-                    <div class="skill-category" style="width: 100%; max-width: 800px; margin: 0 auto;">
-                        <div class="skill-list">
-                            <span>Mastering Data Structure & Algorithms (C/C++)</span>
-                            <span>Python (Basic) Certificate</span>
-                            <span>Git and Github Essentials</span>
-                            <span>SQL (Intermediate)</span>
-                            <span>Intro to Programming Using Java</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <h1 class="reveal">
+              Vikas<br/>Sharma<span class="accent">.</span>
+            </h1>
 
-        <section id="skills" class="section bg-light">
-            <div class="container">
-                <h2 class="section-title">Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>Languages</h3>
-                        <div class="skill-list">
-                            <span>Python</span>
-                            <span>C++</span>
-                            <span>JavaScript</span>
-                            <span>HTML5</span>
-                            <span>CSS3</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Frameworks & Libs</h3>
-                        <div class="skill-list">
-                            <span>Django</span>
-                            <span>Flask</span>
-                            <span>React</span>
-                            <span>Pandas</span>
-                            <span>NumPy</span>
-                            <span>Streamlit</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Cloud & DevOps</h3>
-                        <div class="skill-list">
-                            <span>AWS</span>
-                            <span>Docker</span>
-                            <span>GitHub Actions</span>
-                            <span>MySQL</span>
-                            <span>Selenium</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <p class="hero-role reveal">
+              <span class="mono">&gt;</span> Quantitative Developer <span class="sep">/</span> Algo Trading Infra <span class="sep">/</span> Open Source
+            </p>
 
-        <section id="contact" class="section">
-            <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="contact-wrapper">
-                    <div class="contact-info">
-                        <h3>Let's Talk</h3>
-                        <p>I'm currently open to new opportunities and collaborations. Feel free to reach out!</p>
-                        <div class="contact-details">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <a href="mailto:jnv2252@gmail.com">jnv2252@gmail.com</a>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fab fa-linkedin"></i>
-                                <a href="https://www.linkedin.com/in/vikas-sharma-coder" target="_blank">LinkedIn
-                                    Profile</a>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>New Delhi, India (UTC+5:30)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <form class="contact-form">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
+            <p class="bio reveal">
+              I build <em>production-grade</em> algorithmic trading systems for Indian &amp; US equity and options markets — multi-broker SDKs, distributed execution engines, and NumPy-vectorized backtesters. Author of <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener"><code>pyzdata</code></a> on PyPI.
+            </p>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Vikas Sharma. All rights reserved.</p>
-            <div class="footer-socials">
-                <a href="https://github.com/vikassharma545" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/vikas-sharma-coder" target="_blank"><i
-                        class="fab fa-linkedin"></i></a>
-                <a href="https://leetcode.com/u/Vikassharma545" target="_blank"><i class="fas fa-code"></i></a>
-                <a href="mailto:jnv2252@gmail.com"><i class="fas fa-envelope"></i></a>
+            <div class="hero-cta reveal">
+              <a href="#projects" class="btn-primary">view selected work <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#contact" class="btn-secondary">get in touch</a>
             </div>
+
+            <div class="social-links reveal">
+              <a href="https://github.com/vikassharma545" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/vikas-sharma-coder" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+              <a href="https://pypi.org/project/pyzdata/" aria-label="PyPI" target="_blank" rel="noopener"><i class="fab fa-python"></i></a>
+              <a href="https://leetcode.com/u/Vikassharma545" aria-label="LeetCode" target="_blank" rel="noopener"><i class="fa-solid fa-code"></i></a>
+              <a href="mailto:jnv2252@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+
+          <!-- Terminal card -->
+          <aside class="terminal reveal" aria-label="system readout">
+            <div class="terminal-head">
+              <span class="t-dot red"></span><span class="t-dot amber"></span><span class="t-dot green"></span>
+              <span class="terminal-title">vikas@trader:~ — ps aux</span>
+            </div>
+            <div class="terminal-body">
+              <div class="t-line"><span class="t-prompt">$</span> whoami</div>
+              <div class="t-out">quant_dev &mdash; 3+ yrs &mdash; New Delhi, IN</div>
+              <div class="t-line"><span class="t-prompt">$</span> cat stats.json</div>
+<pre class="t-json"><span class="k">{</span>
+  <span class="s">"daily_turnover"</span>: <span class="n">"₹400+ Cr (~$48M)"</span>,
+  <span class="s">"accounts_managed"</span>: <span class="n">150</span>,
+  <span class="s">"backtest_speedup"</span>: <span class="n">"150×"</span>,
+  <span class="s">"strategies_tested"</span>: <span class="n">200</span>,
+  <span class="s">"pypi_package"</span>: <span class="n">"pyzdata@1.0.6"</span>,
+  <span class="s">"github_stars"</span>: <span class="n">52</span>,
+  <span class="s">"status"</span>: <span class="n">"open_to_work"</span>
+<span class="k">}</span></pre>
+              <div class="t-line"><span class="t-prompt">$</span> <span class="cursor-blink">_</span></div>
+            </div>
+          </aside>
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+        <!-- Stat strip -->
+        <div class="stat-strip reveal">
+          <div class="stat">
+            <div class="stat-num" data-target="400" data-suffix="Cr+"><span class="currency">₹</span>0</div>
+            <div class="stat-lbl">daily turnover</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" data-target="150" data-suffix="+">0</div>
+            <div class="stat-lbl">accounts managed</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" data-target="150" data-suffix="×">0</div>
+            <div class="stat-lbl">backtest speedup</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" data-target="52" data-suffix="★">0</div>
+            <div class="stat-lbl">github stars</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TICKER ============ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Python</span><span class="sep">•</span>
+        <span>NumPy</span><span class="sep">•</span>
+        <span>Polars</span><span class="sep">•</span>
+        <span>DuckDB</span><span class="sep">•</span>
+        <span>ZeroMQ</span><span class="sep">•</span>
+        <span>Interactive Brokers</span><span class="sep">•</span>
+        <span>Zerodha Kite</span><span class="sep">•</span>
+        <span>AWS EC2</span><span class="sep">•</span>
+        <span>Docker</span><span class="sep">•</span>
+        <span>AsyncIO</span><span class="sep">•</span>
+        <span>Parquet</span><span class="sep">•</span>
+        <span>WebSocket</span><span class="sep">•</span>
+        <span>C++</span><span class="sep">•</span>
+        <span>Streamlit</span><span class="sep">•</span>
+        <span>pyzdata</span><span class="sep">•</span>
+        <!-- duplicate for seamless scroll -->
+        <span>Python</span><span class="sep">•</span>
+        <span>NumPy</span><span class="sep">•</span>
+        <span>Polars</span><span class="sep">•</span>
+        <span>DuckDB</span><span class="sep">•</span>
+        <span>ZeroMQ</span><span class="sep">•</span>
+        <span>Interactive Brokers</span><span class="sep">•</span>
+        <span>Zerodha Kite</span><span class="sep">•</span>
+        <span>AWS EC2</span><span class="sep">•</span>
+        <span>Docker</span><span class="sep">•</span>
+        <span>AsyncIO</span><span class="sep">•</span>
+        <span>Parquet</span><span class="sep">•</span>
+        <span>WebSocket</span><span class="sep">•</span>
+        <span>C++</span><span class="sep">•</span>
+        <span>Streamlit</span><span class="sep">•</span>
+        <span>pyzdata</span><span class="sep">•</span>
+      </div>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">01</span>
+          <h2 class="section-title">About</h2>
+          <span class="section-rule"></span>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p class="lead">
+              I'm a <strong>Quantitative Developer</strong> at a proprietary options trading firm where I've spent 3+ years architecting the infrastructure that turns strategy research into executed trades.
+            </p>
+            <p>
+              My work sits at the intersection of <em>Python performance engineering</em>, <em>distributed systems</em>, and <em>financial data engineering</em>. I've designed multi-broker SDKs integrating Zerodha, Interactive Brokers, and XTS; built a ZeroMQ hub-spoke execution engine that runs autonomously on AWS; and rewritten a backtester from <code>~150 hours</code> down to <code>&lt;1 hour</code> through NumPy vectorization and parallel orchestration.
+            </p>
+            <p>
+              Outside work, I maintain <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener"><code>pyzdata</code></a> — an open-source Python library, CLI, and web app for Indian historical market data — and occasionally publish Windows shell utilities for other traders. Long-form reading tilts toward systems and trading — <em>Designing Data-Intensive Applications</em>, <em>Options as a Strategic Investment</em>, <em>Atomic Habits</em>.
+            </p>
+          </div>
+
+          <div class="about-meta reveal">
+            <div class="meta-row"><span class="meta-k">location</span><span class="meta-v">New Delhi, IN</span></div>
+            <div class="meta-row"><span class="meta-k">timezone</span><span class="meta-v">UTC+05:30</span></div>
+            <div class="meta-row"><span class="meta-k">experience</span><span class="meta-v">3+ years</span></div>
+            <div class="meta-row"><span class="meta-k">markets</span><span class="meta-v">NSE · BSE · NFO · MCX · CBOE</span></div>
+            <div class="meta-row"><span class="meta-k">focus</span><span class="meta-v">options &amp; derivatives</span></div>
+            <div class="meta-row"><span class="meta-k">status</span>
+              <span class="meta-v status-live"><span class="live-dot"></span> open to new roles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="work" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">02</span>
+          <h2 class="section-title">Work</h2>
+          <span class="section-rule"></span>
+        </div>
+
+        <div class="timeline">
+
+          <article class="tl-item reveal">
+            <div class="tl-marker"><span class="tl-dot"></span></div>
+            <div class="tl-date">Feb 2024 — present</div>
+            <div class="tl-body">
+              <h3 class="tl-title">Software Engineer II <span class="tl-at">·</span> <a href="https://www.linkedin.com/company/pranjali-growcap-private-limited" target="_blank" rel="noopener">Pranjali Growcap</a></h3>
+              <p class="tl-sub">Proprietary options trading firm — Indian &amp; US equity / derivatives.</p>
+              <ul class="tl-list">
+                <li><strong>Algo Trading SDK</strong> — full-lifecycle Python SDK executing <b class="hl">₹400+ Cr daily turnover across 150+ accounts</b> via Zerodha, IBKR, and XTS; real-time RMS, reconciliation, P&amp;L.</li>
+                <li><strong>US Options Engine</strong> — <b class="hl">ZeroMQ hub-spoke architecture</b>: central TWS hub + 5 independent strategy processes with CSV state machines for crash recovery; fully autonomous on AWS EC2.</li>
+                <li><strong>Backtesting Engine</strong> — NumPy-vectorized rewrite with O(log n) lookup and 37-level portfolio stop-loss; <b class="hl">150× speedup (150 h → &lt;1 h)</b>.</li>
+                <li><strong>Parallel Orchestration</strong> — FileLock job distribution across 16 terminals processing <b class="hl">50,000+ param combos × 250+ dates × 6 DTEs</b>.</li>
+                <li><strong>Strategy Research</strong> — backtested 200+ options selling strategies on 8+ yrs of tick-level data; Polars + DuckDB dashboards with Excel heatmaps via xlwings.</li>
+              </ul>
+              <ul class="tags">
+                <li>Python</li><li>NumPy</li><li>Polars</li><li>DuckDB</li>
+                <li>ZeroMQ</li><li>ib_async</li><li>AWS EC2</li><li>Docker</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="tl-item reveal">
+            <div class="tl-marker"><span class="tl-dot"></span></div>
+            <div class="tl-date">Jul 2022 — Jan 2024</div>
+            <div class="tl-body">
+              <h3 class="tl-title">Software Engineer <span class="tl-at">·</span> Pranjali Growcap</h3>
+              <p class="tl-sub">Foundational platform work.</p>
+              <ul class="tl-list">
+                <li>Built <b>v1 of the firm's algo trading SDK</b> integrating Zerodha Kite &amp; XTS APIs with real-time WebSocket market-data streaming.</li>
+                <li>Developed the firm's <b>first in-house backtesting framework</b> for Indian F&amp;O markets, replacing ad-hoc spreadsheet workflows.</li>
+                <li>Shipped internal monitoring stack (Streamlit + Telegram bots) for live trade alerts, P&amp;L dashboards, and system-health checks.</li>
+                <li>Designed ETL pipelines for tick-level NSE/BSE data.</li>
+              </ul>
+              <ul class="tags">
+                <li>Python</li><li>Pandas</li><li>Zerodha Kite</li><li>XTS</li>
+                <li>WebSocket</li><li>Streamlit</li><li>Telegram API</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="tl-item reveal">
+            <div class="tl-marker"><span class="tl-dot"></span></div>
+            <div class="tl-date">Jan 2022 — Jun 2022</div>
+            <div class="tl-body">
+              <h3 class="tl-title">Data Analyst Intern <span class="tl-at">·</span> Pranjali Growcap</h3>
+              <ul class="tl-list">
+                <li>Built NSE/BSE tick-data cleaning pipelines; contributed pattern-recognition research feeding early strategies.</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">03</span>
+          <h2 class="section-title">Projects</h2>
+          <span class="section-rule"></span>
+        </div>
+
+        <!-- Flagship: pyzdata -->
+        <article class="flagship reveal">
+          <div class="flagship-meta">
+            <span class="flag-tag">flagship · open source</span>
+            <span class="flag-live">
+              <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener"><i class="fab fa-python"></i> live on PyPI</a>
+              <span class="dot"></span>
+              <a href="https://github.com/vikassharma545/Historical-Market-data-From-Zerodha" target="_blank" rel="noopener"><i class="fab fa-github"></i> source</a>
+            </span>
+          </div>
+          <h3 class="flagship-title">pyzdata<span class="accent">.</span></h3>
+          <p class="flagship-sub">Indian historical market-data downloader — <em>Python library · CLI · Streamlit web app</em>.</p>
+
+          <div class="flagship-grid">
+            <div class="flagship-left">
+              <p class="flag-desc">
+                Download OHLCV + Open Interest data for any NSE / BSE / NFO / MCX instrument — intervals from 1-minute to daily. Zero API subscription required. Features <em>parallel downloads, disk caching, rate-limiting, retries, typed exception hierarchy, and 90 unit tests</em>. Python 3.10–3.13, PEP 561 typed, trusted publishing via GitHub Actions (Sigstore-signed releases).
+              </p>
+
+              <div class="install-box" id="install-box" role="button" tabindex="0" aria-label="copy pip install command">
+                <span class="install-prompt">$</span>
+                <span class="install-cmd">pip install pyzdata</span>
+                <span class="install-copy" id="install-copy-label"><i class="far fa-copy"></i> copy</span>
+              </div>
+
+              <div class="flag-tags">
+                <span>Python</span><span>PyPI</span><span>Streamlit</span>
+                <span>CLI</span><span>Threading</span><span>Pandas</span>
+                <span>GitHub Actions</span><span>Sigstore</span>
+              </div>
+            </div>
+
+            <div class="flagship-right">
+              <div class="flag-stat"><span class="k">version</span><span class="v">1.0.6</span></div>
+              <div class="flag-stat"><span class="k">status</span><span class="v">Production/Stable</span></div>
+              <div class="flag-stat"><span class="k">stars</span><span class="v">25★</span></div>
+              <div class="flag-stat"><span class="k">forks</span><span class="v">15</span></div>
+              <div class="flag-stat"><span class="k">tests</span><span class="v">90 unit</span></div>
+              <div class="flag-stat"><span class="k">license</span><span class="v">MIT</span></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project grid -->
+        <div class="project-grid">
+
+          <article class="project-card reveal">
+            <header class="pc-head">
+              <span class="pc-type">enterprise</span>
+              <span class="pc-id">// 02</span>
+            </header>
+            <h3 class="pc-title">US Options Trading Engine</h3>
+            <p class="pc-desc">ZeroMQ hub-spoke architecture — central <code>TWSMasterHub</code> maintains a single TWS connection; 5 independent strategy processes (SRE, BRE, B120, SRE TP/SL) communicate via message-passing. CSV state machines for crash recovery, smart order execution with price chasing &amp; stale-fill detection. Fully autonomous on AWS EC2 with IBC-managed TWS restarts.</p>
+            <div class="pc-metrics">
+              <div><span>5</span>processes</div>
+              <div><span>24/7</span>autonomous</div>
+              <div><span>SPX / SPY / ES</span>instruments</div>
+            </div>
+            <div class="pc-tags"><span>Python 3.12</span><span>ZeroMQ</span><span>ib_async</span><span>AWS EC2</span><span>IBC</span></div>
+          </article>
+
+          <article class="project-card reveal">
+            <header class="pc-head">
+              <span class="pc-type">enterprise</span>
+              <span class="pc-id">// 03</span>
+            </header>
+            <h3 class="pc-title">pgcbacktest — Backtesting Engine</h3>
+            <p class="pc-desc">NumPy-vectorized engine with O(log n) price lookup, synthetic future ATM detection, SD-based strike routing, 37-level portfolio stop-loss. FileLock orchestrator distributes jobs across N parallel terminals; Polars + DuckDB aggregator pushes live heatmaps to Excel via xlwings.</p>
+            <div class="pc-metrics">
+              <div><span>150×</span>speedup</div>
+              <div><span>50K+</span>param combos</div>
+              <div><span>16</span>parallel terminals</div>
+            </div>
+            <div class="pc-tags"><span>NumPy</span><span>Polars</span><span>DuckDB</span><span>Parquet</span><span>FileLock</span><span>xlwings</span></div>
+          </article>
+
+          <article class="project-card reveal">
+            <header class="pc-head">
+              <span class="pc-type">enterprise</span>
+              <span class="pc-id">// 04</span>
+            </header>
+            <h3 class="pc-title">Algo Trading SDK</h3>
+            <p class="pc-desc">Multi-broker Python SDK automating the full trade lifecycle — signal generation, order placement (Zerodha, IBKR, XTS), real-time RMS, position reconciliation, and P&amp;L tracking. Eliminated 100% of manual order flow.</p>
+            <div class="pc-metrics">
+              <div><span>₹400 Cr+</span>daily turnover</div>
+              <div><span>150+</span>accounts</div>
+              <div><span>3</span>broker integrations</div>
+            </div>
+            <div class="pc-tags"><span>Python</span><span>WebSocket</span><span>Multithreading</span><span>Zerodha Kite</span><span>IBKR</span><span>XTS</span></div>
+          </article>
+
+          <article class="project-card reveal">
+            <header class="pc-head">
+              <span class="pc-type">open source · 27★</span>
+              <span class="pc-id"><a href="https://github.com/vikassharma545/APICostFree-Zerodha-Trade" target="_blank" rel="noopener">github ↗</a></span>
+            </header>
+            <h3 class="pc-title">APICostFree-Zerodha-Trade</h3>
+            <p class="pc-desc">Python REST wrapper implementing authentication, session management, and order/market-data endpoints — enabling programmatic Zerodha Kite trading without the paid API subscription. Adopted across the Indian retail algorithmic-trading community.</p>
+            <div class="pc-tags"><span>Python</span><span>REST</span><span>Zerodha</span><span>Requests</span></div>
+          </article>
+
+          <article class="project-card reveal">
+            <header class="pc-head">
+              <span class="pc-type">open source</span>
+              <span class="pc-id"><a href="https://github.com/vikassharma545/Jupyter-Notebook" target="_blank" rel="noopener">github ↗</a></span>
+            </header>
+            <h3 class="pc-title">Developer Tools</h3>
+            <p class="pc-desc">Suite of Windows-integrated utilities built for multi-monitor trading setups — <code>Jupyter</code> context-menu launcher, <code>PickleParquetReader</code> file-association handler, <code>TerminalSequence</code> grid arranger, and <code>Tele_Easy_Bot</code> Telegram wrapper.</p>
+            <div class="pc-tags"><span>Python</span><span>Windows</span><span>pygetwindow</span><span>Telegram API</span></div>
+          </article>
+
+          <article class="project-card reveal">
+            <header class="pc-head">
+              <span class="pc-type">internal tooling</span>
+              <span class="pc-id">// 07</span>
+            </header>
+            <h3 class="pc-title">Strategy Analysis Dashboard</h3>
+            <p class="pc-desc">Real-time straddle-selling optimizer built in Streamlit with interactive Plotly heatmaps, advanced multi-dimensional filters, and live performance metrics. Pushes formatted Excel heatmaps via xlwings for offline review.</p>
+            <div class="pc-tags"><span>Streamlit</span><span>Polars</span><span>Plotly</span><span>xlwings</span></div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STACK ============ -->
+    <section id="stack" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">04</span>
+          <h2 class="section-title">Stack</h2>
+          <span class="section-rule"></span>
+        </div>
+
+        <div class="stack-grid">
+          <div class="stack-cat reveal">
+            <h4>languages</h4>
+            <ul><li>Python <em>(expert)</em></li><li>C++</li><li>SQL</li><li>Bash</li></ul>
+          </div>
+          <div class="stack-cat reveal">
+            <h4>quant &amp; data</h4>
+            <ul><li>NumPy</li><li>Polars</li><li>Pandas</li><li>DuckDB</li><li>Numba</li><li>Dask</li><li>Parquet</li><li>Plotly</li></ul>
+          </div>
+          <div class="stack-cat reveal">
+            <h4>systems</h4>
+            <ul><li>ZeroMQ</li><li>WebSocket</li><li>AsyncIO</li><li>Multithreading</li><li>FileLock</li><li>Docker</li><li>AWS EC2</li><li>Linux</li></ul>
+          </div>
+          <div class="stack-cat reveal">
+            <h4>web &amp; tools</h4>
+            <ul><li>Django</li><li>Flask</li><li>FastAPI</li><li>Streamlit</li><li>Selenium</li><li>Git</li><li>GitHub Actions</li></ul>
+          </div>
+          <div class="stack-cat reveal">
+            <h4>broker APIs</h4>
+            <ul><li>Zerodha Kite</li><li>Interactive Brokers (TWS / ib_async)</li><li>XTS</li><li>IBC</li></ul>
+          </div>
+          <div class="stack-cat reveal">
+            <h4>markets</h4>
+            <ul><li>NSE · BSE · NFO · MCX</li><li>CBOE · CME</li><li>NIFTY · BANKNIFTY · SENSEX</li><li>SPX · SPY · ES</li></ul>
+          </div>
+        </div>
+
+        <!-- Education + coding profiles compact -->
+        <div class="edu-strip reveal">
+          <div class="edu-card">
+            <span class="edu-k">education</span>
+            <div class="edu-main"><strong>BSc Computer Science</strong> — Shaheed Sukhdev College of Business Studies, University of Delhi <span class="edu-date">2021–2023</span></div>
+          </div>
+          <div class="edu-card">
+            <span class="edu-k">competitive programming</span>
+            <div class="edu-main">
+              <a href="https://www.codechef.com/users/Vikassharma545" target="_blank" rel="noopener"><strong>CodeChef</strong> 2★ (1495, peak 1559)</a>
+              <span class="sep">·</span>
+              <a href="https://leetcode.com/u/Vikassharma545" target="_blank" rel="noopener"><strong>LeetCode</strong> 65 solved (43E · 21M · 1H)</a>
+              <span class="sep">·</span>
+              <a href="https://www.hackerrank.com/profile/Vikassharma545" target="_blank" rel="noopener"><strong>HackerRank</strong> SQL Intermediate + 3 verified certs</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">05</span>
+          <h2 class="section-title">Contact</h2>
+          <span class="section-rule"></span>
+        </div>
+
+        <div class="contact-block reveal">
+          <p class="contact-lead">
+            I'm <span class="hl2">open to new roles</span> in quantitative development, algo trading infrastructure, and fintech engineering — full-time or contract. I'd also love to hear about interesting open-source collaborations.
+          </p>
+
+          <div class="contact-pills">
+            <a href="mailto:jnv2252@gmail.com" class="contact-mail">
+              <span class="cm-k">email &rarr;</span>
+              <span class="cm-v">jnv2252@gmail.com</span>
+            </a>
+            <a href="tel:+919354176313" class="contact-mail">
+              <span class="cm-k">phone &rarr;</span>
+              <span class="cm-v">+91 93541 76313</span>
+            </a>
+          </div>
+
+          <div class="contact-links">
+            <a href="https://www.linkedin.com/in/vikas-sharma-coder" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> linkedin</a>
+            <a href="https://github.com/vikassharma545" target="_blank" rel="noopener"><i class="fab fa-github"></i> github</a>
+            <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener"><i class="fab fa-python"></i> pypi</a>
+            <a href="resume/QuantitativeDev.docx" target="_blank" rel="noopener" download><i class="far fa-file"></i> résumé</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <span class="footer-logo">[vs_]</span>
+        <span class="footer-copy">© 2026 Vikas Sharma — built in Delhi, deployed worldwide.</span>
+      </div>
+      <div class="footer-socials">
+        <a href="https://github.com/vikassharma545" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/vikas-sharma-coder" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+        <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener"><i class="fab fa-python"></i></a>
+        <a href="mailto:jnv2252@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
-
 </html>
