@@ -143,7 +143,7 @@
               My work sits where Python performance engineering, distributed systems and data engineering meet, with web and tooling work alongside. I've built an SDK that integrates three third-party REST and WebSocket APIs with real-time validation and reconciliation; a ZeroMQ hub-spoke system with CSV-backed state machines for crash recovery, running autonomously on AWS EC2; a batch engine rewritten from about 150 hours to under 1 hour; and ETL pipelines that turn 8+ years of tick-level data into Parquet, served through a Polars and DuckDB layer and Streamlit dashboards.
             </p>
             <p>
-              Outside work I maintain <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener">pyzdata</a>, an open-source Python library, CLI and web app on PyPI, along with a REST client library adopted by the Indian retail trading community and a set of Windows productivity tools. Long-form reading tilts toward systems and markets: <em>Designing Data-Intensive Applications</em>, <em>Options as a Strategic Investment</em>, <em>Atomic Habits</em>.
+              Outside work I maintain <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener">pyzdata</a>, an open-source Python library, CLI and web app on PyPI, along with an unofficial Zerodha Kite client adopted by the Indian retail trading community and a set of Windows productivity tools. Long-form reading tilts toward systems and markets: <em>Designing Data-Intensive Applications</em>, <em>Options as a Strategic Investment</em>, <em>Atomic Habits</em>.
             </p>
           </div>
 
@@ -259,7 +259,7 @@
           <div class="flag-grid">
             <div>
               <p class="flag-desc">
-                Download OHLCV and open-interest data for any NSE, BSE, NFO or MCX instrument at intervals from 1 minute to daily, with no API subscription required. Parallel downloads, disk caching, rate limiting, retries and a typed exception hierarchy. Package engineering: 90 unit tests, PEP 561 typing, semantic versioning, Python 3.10 to 3.13, and trusted publishing through GitHub Actions with Sigstore-signed releases.
+                Download OHLCV and open-interest data for any NSE, BSE, NFO or MCX instrument at intervals from 1 minute to daily. Parallel downloads, disk caching, rate limiting, retries and a typed exception hierarchy. Package engineering: 90 unit tests, PEP 561 typing, semantic versioning, Python 3.10 to 3.13, and trusted publishing through GitHub Actions with Sigstore-signed releases.
               </p>
               <button class="install" id="install" type="button" aria-label="Copy the pip install command">
                 <span class="install-prompt" aria-hidden="true">$</span>
@@ -409,9 +409,9 @@
         <h3 class="group-title">Libraries and tools</h3>
         <ul class="more">
           <li>
-            <h4><a href="https://github.com/vikassharma545/KiteWeb" target="_blank" rel="noopener">KiteWeb, formerly APICostFree-Zerodha-Trade<svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></h4>
+            <h4><a href="https://github.com/vikassharma545/KiteWeb" target="_blank" rel="noopener">KiteWeb<svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></h4>
             <p class="more-meta">Open source, <span data-gh="stars:KiteWeb">28</span> stars, <span data-gh="forks:KiteWeb">9</span> forks</p>
-            <p>REST client library implementing authentication, session management and high-level order and market-data endpoints for a retail broker, so users can trade programmatically without the paid API subscription. Adopted across the Indian retail algorithmic-trading community.</p>
+            <p>Unofficial Python client for Zerodha Kite's web endpoints: authentication, session management, and order and market-data calls. Built for learning and personal automation, and adopted across the Indian retail algorithmic-trading community.</p>
           </li>
           <li>
             <h4><a href="https://github.com/vikassharma545/Jupyter-Notebook" target="_blank" rel="noopener">Developer productivity tools<svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></h4>
