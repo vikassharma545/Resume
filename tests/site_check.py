@@ -174,10 +174,16 @@ def phone(browser, site_url):
 
 # Tests ----------------------------------------------------------------------
 
+EXTERNAL_APIS = ("api.github.com", "pypi.org")
+
+
 def test_no_console_errors_or_failed_requests(desktop):
     page, logs = desktop
-    assert logs["errors"] == [], logs["errors"]
-    assert logs["failed"] == [], logs["failed"]
+    # live-count requests to GitHub and PyPI may be rate limited; the page falls back to baked-in numbers
+    errors = [e for e in logs["errors"] if not any(h in e for h in EXTERNAL_APIS)]
+    failed = [f for f in logs["failed"] if not any(h in f for h in EXTERNAL_APIS)]
+    assert errors == [], errors
+    assert failed == [], failed
 
 
 def test_no_horizontal_overflow_at_phone_width(phone):
@@ -286,3 +292,14 @@ def test_positioning_is_all_round_software_engineer(desktop):
     resume_order = page.evaluate("() => Array.from(document.querySelectorAll('.resume-list a')).map(a => a.getAttribute('href'))")
     assert resume_order[0] == "resume/SDE.docx", f"the general résumé should be listed first, got {resume_order}"
 
+
+
+def test_live_github_numbers_have_static_fallbacks(desktop):
+    page, _ = desktop
+    cells = page.evaluate("""() => Array.from(document.querySelectorAll('[data-gh], [data-pypi]'))
+        .map(e => [e.getAttribute('data-gh') || 'pypi', e.textContent.trim()])""")
+    kinds = {k for k, _ in cells}
+    for needed in ("stars-total", "stars:Historical-Market-data-From-Zerodha", "forks:Historical-Market-data-From-Zerodha", "stars:KiteWeb", "forks:KiteWeb", "pypi"):
+        assert needed in kinds, f"no live-updated element for {needed}"
+    for kind, text in cells:
+        assert text and text[0].isdigit(), f"{kind} shows {text!r}, expected a baked-in number as fallback"

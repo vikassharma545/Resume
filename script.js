@@ -64,6 +64,34 @@
     });
   }
 
+  /* ---------- live numbers from GitHub and PyPI; the baked-in values stay if a request fails ---------- */
+  const ghEls = $$('[data-gh]');
+  if (ghEls.length && 'fetch' in window) {
+    fetch('https://api.github.com/users/vikassharma545/repos?per_page=100', { headers: { Accept: 'application/vnd.github+json' } })
+      .then(r => (r.ok ? r.json() : Promise.reject(new Error('GitHub API ' + r.status))))
+      .then((repos) => {
+        const byName = {};
+        let total = 0;
+        repos.forEach((r) => { byName[r.name] = r; if (!r.fork) total += r.stargazers_count || 0; });
+        ghEls.forEach((el) => {
+          const [kind, name] = el.dataset.gh.split(':');
+          let value;
+          if (kind === 'stars-total') value = total;
+          else if (kind === 'stars' && byName[name]) value = byName[name].stargazers_count;
+          else if (kind === 'forks' && byName[name]) value = byName[name].forks_count;
+          if (typeof value === 'number') el.textContent = String(value);
+        });
+      })
+      .catch(() => { /* rate limited or offline: keep the numbers baked into the page */ });
+  }
+  const pypiEls = $$('[data-pypi]');
+  if (pypiEls.length && 'fetch' in window) {
+    fetch('https://pypi.org/pypi/pyzdata/json')
+      .then(r => (r.ok ? r.json() : Promise.reject(new Error('PyPI ' + r.status))))
+      .then((d) => { if (d.info && d.info.version) pypiEls.forEach(el => { el.textContent = d.info.version; }); })
+      .catch(() => { /* keep the baked-in version */ });
+  }
+
   /* ---------- hero tape: a synthetic candlestick chart that draws itself once ---------- */
   const tape = () => {
     const canvas = $('#tape');
