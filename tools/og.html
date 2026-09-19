@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Share card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink: #0C1220; --up: #0FA88A; --down: #E03A3A; --amber: #FFB020; }
+    html, body { margin: 0; width: 1200px; height: 630px; background: var(--ink); color: #EEF1F7; font-family: 'Instrument Sans', sans-serif; overflow: hidden; }
+    .card { position: relative; width: 1200px; height: 630px; padding: 60px 72px; box-sizing: border-box; display: grid; grid-template-columns: 1fr 340px; gap: 56px; align-items: center; }
+    .tape-wrap { position: absolute; top: 0; bottom: 0; left: 40%; right: 0; }
+    #tape { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .copy { position: relative; z-index: 1; }
+    .name { font-weight: 700; font-size: 100px; line-height: 0.95; letter-spacing: -0.035em; margin: 0 0 20px; }
+    .role { font-weight: 500; font-size: 34px; line-height: 1.2; margin: 0 0 16px; max-width: 640px; }
+    .bio { font-size: 23px; color: #B5BFD0; max-width: 580px; margin: 0 0 32px; line-height: 1.35; }
+    .nums { display: flex; gap: 40px; }
+    .nums b { display: block; font-family: 'JetBrains Mono', monospace; font-size: 34px; font-weight: 700; line-height: 1; }
+    .nums .lbl { display: block; margin-top: 8px; font-size: 16px; color: #8A97AD; }
+    .amber { color: var(--amber); }
+    .pic { position: relative; z-index: 1; width: 340px; }
+    .pic::before { content: ''; position: absolute; inset: 0; transform: translate(16px, 16px); border: 1px solid var(--amber); border-radius: 18px; }
+    .pic img { position: relative; display: block; width: 340px; height: 425px; object-fit: cover; border-radius: 18px; border: 1px solid rgba(196, 210, 235, 0.22); }
+    .url { position: absolute; left: 72px; bottom: 34px; font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #8A97AD; z-index: 1; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="tape-wrap"><canvas id="tape"></canvas></div>
+    <div class="copy">
+      <p class="name">Vikas Sharma</p>
+      <p class="role">Software engineer. Distributed systems, data platforms, open source.</p>
+      <p class="bio">Python systems handling ₹400 Cr a day across 150+ clients, a 150× performance rewrite, and pyzdata on PyPI.</p>
+      <div class="nums">
+        <div><b><span class="amber">₹</span>400 Cr+</b><span class="lbl">daily volume</span></div>
+        <div><b>150+</b><span class="lbl">client accounts</span></div>
+        <div><b>150×</b><span class="lbl">faster rewrite</span></div>
+        <div><b>52<span class="amber">★</span></b><span class="lbl">GitHub stars</span></div>
+      </div>
+    </div>
+    <div class="pic"><img src="../assets/portrait.jpg" alt="" /></div>
+    <p class="url">vikassharma545.github.io/Resume</p>
+  </div>
+  <script src="../script.js"></script>
+</body>
+</html>

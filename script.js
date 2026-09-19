@@ -1,148 +1,253 @@
-document.addEventListener('DOMContentLoaded', () => {
+(() => {
+  'use strict';
 
-  /* ---------- live IST clock in header ---------- */
-  const clock = document.getElementById('live-clock');
-  const fmt = n => String(n).padStart(2, '0');
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- IST clock and NSE session state ---------- */
+  const clock = $('#clock');
+  const session = $('#session');
+  const chip = $('#market-chip');
+  const istFormat = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false, weekday: 'short',
+  });
   const tick = () => {
-    if (!clock) return;
-    // Build IST time from any client — always show UTC+05:30
-    const now = new Date();
-    const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
-    const ist = new Date(utcMs + 330 * 60000);
-    clock.textContent = `${fmt(ist.getHours())}:${fmt(ist.getMinutes())}:${fmt(ist.getSeconds())} IST`;
+    const parts = {};
+    istFormat.formatToParts(new Date()).forEach(p => { parts[p.type] = p.value; });
+    const h = parseInt(parts.hour, 10) % 24;
+    const m = parseInt(parts.minute, 10);
+    const weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].includes(parts.weekday);
+    const minutes = h * 60 + m;
+    const inSession = weekday && minutes >= 9 * 60 + 15 && minutes < 15 * 60 + 30;
+    if (clock) clock.textContent = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')} IST`;
+    if (session) session.textContent = inSession ? 'NSE in session' : 'NSE closed';
+    if (chip) chip.classList.toggle('is-open', inSession);
   };
   tick();
-  setInterval(tick, 1000);
+  setInterval(tick, 15000);
 
-  /* ---------- sticky header shadow on scroll ---------- */
-  const header = document.getElementById('header');
-  const onScroll = () => {
-    if (!header) return;
-    if (window.scrollY > 40) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
-  };
+  /* ---------- header hairline once the page scrolls ---------- */
+  const header = $('#header');
+  const onScroll = () => { if (header) header.classList.toggle('scrolled', window.scrollY > 24); };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* ---------- smooth scroll + close mobile on nav click ---------- */
-  const navLinks = document.querySelector('.nav-links');
-  const hamburger = document.getElementById('hamburger-btn');
-  const closeMenu = () => {
-    if (!navLinks) return;
-    navLinks.classList.remove('active');
-    if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+  /* ---------- phone menu ---------- */
+  const menuBtn = $('#menu-btn');
+  const navLinks = $('#nav-links');
+  const setMenu = (open) => {
+    if (!menuBtn || !navLinks) return;
+    navLinks.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    const use = menuBtn.querySelector('use');
+    if (use) use.setAttribute('href', open ? '#i-close' : '#i-menu');
   };
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const href = a.getAttribute('href');
-      if (href.length < 2) return;
-      const tgt = document.querySelector(href);
-      if (!tgt) return;
-      e.preventDefault();
-      tgt.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (navLinks && navLinks.classList.contains('active')) closeMenu();
-    });
-  });
-
-  /* ---------- mobile menu ---------- */
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('active');
-      hamburger.setAttribute('aria-expanded', String(open));
-    });
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
+    navLinks.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
   }
 
-  /* ---------- reveal on scroll (with graceful fallbacks) ---------- */
-  const revealables = document.querySelectorAll('.reveal');
-
-  // Fallback 1: if IntersectionObserver unavailable, show everything now.
-  // Fallback 2: anything already in the initial viewport gets revealed without waiting.
-  const showNow = (el) => el.classList.add('in');
-
-  if ('IntersectionObserver' in window) {
-    // Reveal anything already on-screen immediately (avoids flash on refresh)
-    revealables.forEach(el => {
-      const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight * 0.95 && r.bottom > 0) showNow(el);
-    });
-
+  /* ---------- mark the section in view in the nav ---------- */
+  const links = $$('.nav-links a[href^="#"]');
+  const sections = links.map(a => $(a.getAttribute('href'))).filter(Boolean);
+  if ('IntersectionObserver' in window && sections.length) {
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => showNow(e.target), Math.min(i, 6) * 60);
-          io.unobserve(e.target);
-        }
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.forEach((a) => {
+          if (a.getAttribute('href') === '#' + entry.target.id) a.setAttribute('aria-current', 'true');
+          else a.removeAttribute('aria-current');
+        });
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-    revealables.forEach(el => { if (!el.classList.contains('in')) io.observe(el); });
-
-    // Last-resort fallback: after 3s, make sure everything is visible.
-    setTimeout(() => revealables.forEach(showNow), 3000);
-  } else {
-    revealables.forEach(showNow);
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => io.observe(s));
   }
 
-  /* ---------- animated stat counters ---------- */
-  const stats = document.querySelectorAll('.stat-num[data-target]');
-  const animateCounter = (el) => {
-    const target = parseInt(el.dataset.target, 10);
-    const suffix = el.dataset.suffix || '';
-    const hasCurrency = el.querySelector('.currency');
-    const duration = 1400;
-    const start = performance.now();
-    const step = (now) => {
-      const p = Math.min((now - start) / duration, 1);
-      // ease-out cubic
-      const eased = 1 - Math.pow(1 - p, 3);
-      const val = Math.floor(target * eased);
-      if (hasCurrency) {
-        el.innerHTML = `<span class="currency">₹</span>${val}${suffix}`;
-      } else {
-        el.textContent = `${val}${suffix}`;
-      }
-      if (p < 1) requestAnimationFrame(step);
-      else {
-        // final exact
-        if (hasCurrency) el.innerHTML = `<span class="currency">₹</span>${target}${suffix}`;
-        else el.textContent = `${target}${suffix}`;
-      }
-    };
-    requestAnimationFrame(step);
-  };
-
-  if ('IntersectionObserver' in window) {
-    const so = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          animateCounter(e.target);
-          so.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.4 });
-    stats.forEach(s => so.observe(s));
-  } else {
-    stats.forEach(animateCounter);
-  }
-
-  /* ---------- copy pip install command ---------- */
-  const installBox = document.getElementById('install-box');
-  const copyLabel = document.getElementById('install-copy-label');
-  if (installBox && navigator.clipboard) {
-    const doCopy = async () => {
+  /* ---------- copy the install command ---------- */
+  const install = $('#install');
+  const copyLabel = $('#install-copy');
+  if (install) {
+    install.addEventListener('click', async () => {
+      if (!navigator.clipboard) return;
       try {
         await navigator.clipboard.writeText('pip install pyzdata');
-        installBox.classList.add('copied');
-        if (copyLabel) copyLabel.innerHTML = '<i class="fas fa-check"></i> copied';
+        install.classList.add('copied');
+        if (copyLabel) copyLabel.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Copied';
         setTimeout(() => {
-          installBox.classList.remove('copied');
-          if (copyLabel) copyLabel.innerHTML = '<i class="far fa-copy"></i> copy';
+          install.classList.remove('copied');
+          if (copyLabel) copyLabel.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy';
         }, 1800);
-      } catch (err) { /* silently ignore */ }
-    };
-    installBox.addEventListener('click', doCopy);
-    installBox.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doCopy(); }
+      } catch (err) {
+        /* clipboard blocked: the command stays on screen to select by hand */
+      }
     });
   }
 
-});
+  /* ---------- hero tape: a synthetic candlestick chart that draws itself once ---------- */
+  const tape = () => {
+    const canvas = $('#tape');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const css = getComputedStyle(document.documentElement);
+    const tone = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
+    const C = {
+      up: tone('--up', '#0FA88A'),
+      down: tone('--down', '#E03A3A'),
+      amber: tone('--amber', '#FFB020'),
+      ink: tone('--ink', '#0C1220'),
+      grid: 'rgba(196, 210, 235, 0.09)',
+    };
+
+    // Deterministic pseudo-random walk, so every visitor sees the same chart.
+    const mulberry32 = (a) => () => {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+
+    let W = 0, H = 0, N = 0;
+    let candles = [], ma = [], lo = 0, hi = 1;
+
+    const build = (count) => {
+      N = count;
+      const rand = mulberry32(20220107);
+      candles = [];
+      let price = 100;
+      for (let i = 0; i < N; i++) {
+        const o = price;
+        const c = o + (rand() - 0.5) * 2.4 + 0.16 + Math.sin(i / 9) * 0.35;
+        const h = Math.max(o, c) + rand() * 1.1;
+        const l = Math.min(o, c) - rand() * 1.1;
+        candles.push({ o, c, h, l });
+        price = c;
+      }
+      ma = candles.map((_, i) => {
+        const from = Math.max(0, i - 9);
+        const slice = candles.slice(from, i + 1);
+        return slice.reduce((sum, k) => sum + k.c, 0) / slice.length;
+      });
+      lo = Math.min(...candles.map(k => k.l));
+      hi = Math.max(...candles.map(k => k.h));
+    };
+
+    const size = () => {
+      const rect = canvas.getBoundingClientRect();
+      W = Math.max(1, Math.round(rect.width));
+      H = Math.max(1, Math.round(rect.height));
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // roughly one candle per 11px so the marks stay legible at any width
+      const count = Math.max(40, Math.min(96, Math.round(W / 11)));
+      if (count !== N) build(count);
+    };
+
+    const draw = (progress) => {
+      ctx.clearRect(0, 0, W, H);
+      const top = H * 0.10, bottom = H * 0.90;
+      const y = v => bottom - (v - lo) / (hi - lo) * (bottom - top);
+      const slot = W / N;
+      const bodyW = Math.max(3, Math.round(slot * 0.62));
+
+      ctx.strokeStyle = C.grid;
+      ctx.lineWidth = 1;
+      for (let g = 0; g <= 4; g++) {
+        const gy = Math.round(top + (bottom - top) * g / 4) + 0.5;
+        ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke();
+      }
+
+      const n = Math.floor(progress * N);
+      for (let i = 0; i < n; i++) {
+        const k = candles[i];
+        const x = Math.round(slot * i + slot / 2) + 0.5;
+        const up = k.c >= k.o;
+        const colour = up ? C.up : C.down;
+        ctx.strokeStyle = colour;
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x, y(k.h)); ctx.lineTo(x, y(k.l)); ctx.stroke();
+        const by = Math.min(y(k.o), y(k.c));
+        const bh = Math.max(2, Math.abs(y(k.o) - y(k.c)));
+        const bx = x - bodyW / 2;
+        if (up) {
+          // hollow body for an up candle, filled for a down candle: readable without colour
+          ctx.fillStyle = C.ink;
+          ctx.fillRect(bx, by, bodyW, bh);
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(bx + 0.5, by + 0.5, bodyW - 1, Math.max(1, bh - 1));
+        } else {
+          ctx.fillStyle = colour;
+          ctx.fillRect(bx, by, bodyW, bh);
+        }
+      }
+
+      if (n > 1) {
+        ctx.strokeStyle = C.amber;
+        ctx.lineWidth = 2;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        for (let i = 0; i < n; i++) {
+          const x = slot * i + slot / 2;
+          if (i === 0) ctx.moveTo(x, y(ma[i])); else ctx.lineTo(x, y(ma[i]));
+        }
+        ctx.stroke();
+        const ex = slot * (n - 1) + slot / 2, ey = y(ma[n - 1]);
+        ctx.fillStyle = C.ink;
+        ctx.beginPath(); ctx.arc(ex, ey, 6.5, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = C.amber;
+        ctx.beginPath(); ctx.arc(ex, ey, 4.5, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // fade the chart under the text column (wide layouts) and at the top and bottom edges
+      const fadeIn = W > 700 ? 0.3 : 0.08;
+      ctx.globalCompositeOperation = 'destination-in';
+      let g = ctx.createLinearGradient(0, 0, W, 0);
+      g.addColorStop(0, 'rgba(0,0,0,0)');
+      g.addColorStop(fadeIn, 'rgba(0,0,0,1)');
+      g.addColorStop(0.9, 'rgba(0,0,0,1)');
+      g.addColorStop(1, 'rgba(0,0,0,0.3)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, 'rgba(0,0,0,0)');
+      g.addColorStop(0.18, 'rgba(0,0,0,1)');
+      g.addColorStop(0.82, 'rgba(0,0,0,1)');
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'source-over';
+    };
+
+    size();
+    let finished = false;
+    if (reduceMotion) {
+      draw(1);
+      finished = true;
+    } else {
+      const start = performance.now();
+      const duration = 2400;
+      const step = (now) => {
+        const p = Math.min(1, (now - start) / duration);
+        draw(1 - Math.pow(1 - p, 3));
+        if (p < 1) requestAnimationFrame(step); else finished = true;
+      };
+      requestAnimationFrame(step);
+    }
+
+    if ('ResizeObserver' in window) {
+      let pending = 0;
+      new ResizeObserver(() => {
+        const rect = canvas.getBoundingClientRect();
+        if (Math.round(rect.width) === W && Math.round(rect.height) === H) return;
+        cancelAnimationFrame(pending);
+        pending = requestAnimationFrame(() => { size(); if (finished) draw(1); });
+      }).observe(canvas.parentElement || canvas);
+    }
+  };
+  tape();
+})();
