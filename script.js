@@ -5,28 +5,6 @@
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- IST clock and NSE session state ---------- */
-  const clock = $('#clock');
-  const session = $('#session');
-  const chip = $('#market-chip');
-  const istFormat = new Intl.DateTimeFormat('en-GB', {
-    timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false, weekday: 'short',
-  });
-  const tick = () => {
-    const parts = {};
-    istFormat.formatToParts(new Date()).forEach(p => { parts[p.type] = p.value; });
-    const h = parseInt(parts.hour, 10) % 24;
-    const m = parseInt(parts.minute, 10);
-    const weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].includes(parts.weekday);
-    const minutes = h * 60 + m;
-    const inSession = weekday && minutes >= 9 * 60 + 15 && minutes < 15 * 60 + 30;
-    if (clock) clock.textContent = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')} IST`;
-    if (session) session.textContent = inSession ? 'NSE in session' : 'NSE closed';
-    if (chip) chip.classList.toggle('is-open', inSession);
-  };
-  tick();
-  setInterval(tick, 15000);
-
   /* ---------- header hairline once the page scrolls ---------- */
   const header = $('#header');
   const onScroll = () => { if (header) header.classList.toggle('scrolled', window.scrollY > 24); };
