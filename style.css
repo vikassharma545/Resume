@@ -668,7 +668,7 @@ h1 {
   line-height: 1.2;
   margin-bottom: 1rem;
 }
-.resume-list a {
+.resume-list li {
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -677,12 +677,19 @@ h1 {
   border: 1px solid var(--line-2);
   border-radius: var(--r-sm);
   background: var(--ink-2);
-  font-weight: 500;
-  transition: border-color 0.18s ease;
 }
-.resume-list a:hover { border-color: var(--amber); }
 .resume-list .icon { color: var(--amber); }
-.resume-list .ext { margin-left: auto; font-family: var(--mono); font-size: var(--fs-xs); color: var(--paper-3); }
+.rl-name { font-weight: 500; margin-right: auto; }
+.resume-list a {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  color: var(--paper-2);
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--line-2);
+  border-radius: 4px;
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+.resume-list a:hover { border-color: var(--amber); color: var(--amber); }
 
 /* =========== FOOTER =========== */
 footer { border-top: 1px solid var(--line); margin-top: 4rem; padding: 2rem 0 2.5rem; }

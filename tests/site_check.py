@@ -19,9 +19,9 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parent.parent
 
 RESUME_FILES = [
-    "resume/QuantitativeDev.docx",
-    "resume/PythonDev.docx",
-    "resume/SDE.docx",
+    "resume/Vikas-Sharma-Software-Engineer.pdf", "resume/Vikas-Sharma-Software-Engineer.docx",
+    "resume/Vikas-Sharma-Python-Developer.pdf", "resume/Vikas-Sharma-Python-Developer.docx",
+    "resume/Vikas-Sharma-Quantitative-Developer.pdf", "resume/Vikas-Sharma-Quantitative-Developer.docx",
 ]
 
 # JS helpers evaluated inside the page --------------------------------------
@@ -290,7 +290,7 @@ def test_positioning_is_all_round_software_engineer(desktop):
         low = text.lower()
         assert "quantitative developer" not in low and "quant " not in low, f"{label} still reads as quant-only: {text!r}"
     resume_order = page.evaluate("() => Array.from(document.querySelectorAll('.resume-list a')).map(a => a.getAttribute('href'))")
-    assert resume_order[0] == "resume/SDE.docx", f"the general résumé should be listed first, got {resume_order}"
+    assert resume_order[0].startswith("resume/Vikas-Sharma-Software-Engineer"), f"the general résumé should be listed first, got {resume_order}"
 
 
 
