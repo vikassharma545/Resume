@@ -149,7 +149,7 @@ def _open(browser, url, width=1440, height=900, mobile=False):
     ctx = browser.new_context(viewport={"width": width, "height": height}, is_mobile=mobile, has_touch=mobile)
     page = ctx.new_page()
     logs = {"errors": [], "failed": []}
-    page.on("console", lambda m: logs["errors"].append(m.text) if m.type == "error" else None)
+    page.on("console", lambda m: logs["errors"].append(m.text + " " + ((m.location or {}).get("url") or "")) if m.type == "error" else None)
     page.on("pageerror", lambda e: logs["errors"].append(str(e)))
     page.on("requestfailed", lambda r: logs["failed"].append(r.url))
     page.goto(url, wait_until="networkidle", timeout=60000)
@@ -303,3 +303,4 @@ def test_live_github_numbers_have_static_fallbacks(desktop):
         assert needed in kinds, f"no live-updated element for {needed}"
     for kind, text in cells:
         assert text and text[0].isdigit(), f"{kind} shows {text!r}, expected a baked-in number as fallback"
+

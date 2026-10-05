@@ -4,6 +4,7 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   /* ---------- header hairline once the page scrolls ---------- */
   const header = $('#header');
@@ -92,7 +93,260 @@
       .catch(() => { /* keep the baked-in version */ });
   }
 
-  /* ---------- hero tape: a synthetic candlestick chart that draws itself once ---------- */
+  /* ---------- text effects: letters rise on load and as titles scroll in, nav links scramble on hover,
+     buttons lean toward the cursor, the page skews with scroll speed, the hero drifts with the mouse ---------- */
+  const root = document.documentElement;
+  root.classList.add('fx');
+  const split = (el) => { // words of letter spans; the heading keeps its text for assistive tech
+    if (!el || el.querySelector('.ch')) return;
+    el.setAttribute('aria-label', (el.innerText || el.textContent).trim().replace(/\s+/g, ' '));
+    let i = 0;
+    const frag = document.createDocumentFragment();
+    Array.from(el.childNodes).forEach((node) => {
+      if (node.nodeType !== Node.TEXT_NODE) { frag.appendChild(node.cloneNode(true)); return; }
+      node.textContent.split(/(\s+)/).forEach((part) => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+        const word = document.createElement('span');
+        word.className = 'word';
+        word.setAttribute('aria-hidden', 'true');
+        for (const ch of part) {
+          const span = document.createElement('span');
+          span.className = 'ch';
+          span.style.setProperty('--i', String(i++));
+          span.textContent = ch;
+          word.appendChild(span);
+        }
+        frag.appendChild(word);
+      });
+    });
+    el.replaceChildren(frag);
+  };
+  if (!reduceMotion) {
+    split($('#hero-name'));
+    $$('.hero-copy > :not(h1)').forEach((el, n) => { el.classList.add('rise'); el.style.setProperty('--d', (n ? 520 + n * 110 : 0) + 'ms'); });
+    const frame = $('.portrait .frame');
+    if (frame) { frame.classList.add('rise'); frame.style.setProperty('--d', '300ms'); }
+    const titles = $$('.section-head, .flag-title, .group-title');
+    titles.forEach((el) => {
+      split(el.matches('.section-head') ? el.querySelector('h2') : el);
+      const deck = el.querySelector('.deck');
+      if (deck) { deck.classList.add('rise'); deck.style.setProperty('--d', '220ms'); }
+    });
+    if ('IntersectionObserver' in window) {
+      const seen = new IntersectionObserver((entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); seen.unobserve(e.target); }
+      }), { threshold: 0.2 });
+      titles.forEach((el) => seen.observe(el));
+    } else {
+      titles.forEach((el) => el.classList.add('in'));
+    }
+  }
+  const begin = () => root.classList.add('fx-in');
+  if (reduceMotion) begin();
+  else {
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(begin));
+    setTimeout(begin, 1500); // never wait on a slow font
+  }
+
+  /* the hero drifts with the mouse and zooms out as you scroll away; one painter writes both */
+  const heroCopy = $('.hero-copy'), heroName = $('#hero-name'), heroPic = $('.portrait');
+  const hero = { cx: 0, cy: 0, tx: 0, ty: 0, p: 0, raf: 0 };
+  const paintHero = () => {
+    const p = hero.p; // 0 at the top of the page, 1 once the first screen has scrolled away
+    if (heroCopy) {
+      heroCopy.style.transform = `translate(${(hero.cx * -8).toFixed(1)}px, ${(hero.cy * -5 - p * 40).toFixed(1)}px) scale(${(1 - p * 0.06).toFixed(3)})`;
+      heroCopy.style.opacity = (1 - p * 0.55).toFixed(3);
+    }
+    if (heroName) heroName.style.transform = `scale(${(1 + p * 0.28).toFixed(3)})`; // the name flies toward you as the rest recedes
+    if (heroPic) heroPic.style.transform = `translate(${(hero.cx * 14).toFixed(1)}px, ${(hero.cy * 9 + p * 36).toFixed(1)}px) scale(${(1 + p * 0.06).toFixed(3)})`;
+  };
+
+  const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&/';
+  if (finePointer && !reduceMotion) {
+    $$('.nav-links a').forEach((a) => {
+      const text = a.textContent;
+      let timer = 0;
+      if (a.offsetWidth) a.style.minWidth = a.offsetWidth + 'px'; // keep the width while the letters change
+      a.addEventListener('pointerenter', () => {
+        const t0 = performance.now();
+        clearInterval(timer);
+        timer = setInterval(() => {
+          const step = Math.floor((performance.now() - t0) / 40); // one letter settles every 40 ms, whatever the frame rate
+          if (step > text.length) { clearInterval(timer); a.textContent = text; return; }
+          a.textContent = text.split('').map((c, i) => (i < step ? c : GLYPHS[Math.floor(Math.random() * GLYPHS.length)])).join('');
+        }, 40);
+      });
+    });
+
+    $$('.btn, .social a, .footer-links a, .install, .resume-list a').forEach((el) => {
+      el.classList.add('magnet');
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+        el.style.transform = `translate(${(dx * 0.3).toFixed(1)}px, ${(dy * 0.3).toFixed(1)}px)`;
+      });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+
+    const tick = () => {
+      hero.cx += (hero.tx - hero.cx) * 0.06; hero.cy += (hero.ty - hero.cy) * 0.06;
+      paintHero();
+      hero.raf = (Math.abs(hero.tx - hero.cx) + Math.abs(hero.ty - hero.cy) > 0.002) ? requestAnimationFrame(tick) : 0;
+    };
+    window.addEventListener('pointermove', (e) => {
+      hero.tx = (e.clientX / window.innerWidth) * 2 - 1; hero.ty = (e.clientY / window.innerHeight) * 2 - 1;
+      if (!hero.raf) hero.raf = requestAnimationFrame(tick);
+    }, { passive: true });
+  }
+
+  /* ---------- zoom and dance: headings swell as they pass mid-screen, numbers pop in, the hero zooms out as you
+     scroll away, letters and words near the cursor lift and grow, and the name ripples now and then ---------- */
+  if (!reduceMotion) {
+    const words = (el) => { // word spans, so single words can move
+      if (!el || el.querySelector('.wd')) return;
+      const frag = document.createDocumentFragment();
+      Array.from(el.childNodes).forEach((node) => {
+        if (node.nodeType !== Node.TEXT_NODE) { frag.appendChild(node.cloneNode(true)); return; }
+        node.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+          const span = document.createElement('span');
+          span.className = 'wd';
+          span.textContent = part;
+          frag.appendChild(span);
+        });
+      });
+      el.replaceChildren(frag);
+    };
+    $$('.hero-statement, .deck').forEach(words);
+
+    const heads = $$('.section-head h2, .flag-title, .group-title');
+    heads.forEach((el) => el.classList.add('zoomable'));
+    $$('.board dd, .metrics dd').forEach((el, n) => { el.classList.add('zoom'); el.style.setProperty('--d', (n % 4) * 90 + 'ms'); });
+    if ('IntersectionObserver' in window) {
+      const pop = new IntersectionObserver((entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); pop.unobserve(e.target); }
+      }), { threshold: 0.3 });
+      $$('.board, .metrics').forEach((el) => pop.observe(el));
+    } else {
+      $$('.board, .metrics').forEach((el) => el.classList.add('in'));
+    }
+
+    let zoomRaf = 0;
+    const zoomScroll = () => {
+      zoomRaf = 0;
+      const vh = window.innerHeight;
+      hero.p = Math.max(0, Math.min(1, window.scrollY / (vh * 0.9)));
+      paintHero();
+      heads.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -80 || r.top > vh + 80) return;
+        const t = 1 - Math.min(1, Math.abs(r.top + r.height / 2 - vh * 0.5) / (vh * 0.55));
+        el.style.transform = `scale(${(0.86 + 0.24 * t * t).toFixed(3)})`;
+      });
+    };
+    const queueZoom = () => { if (!zoomRaf) zoomRaf = requestAnimationFrame(zoomScroll); };
+    window.addEventListener('scroll', queueZoom, { passive: true });
+    window.addEventListener('resize', queueZoom);
+    zoomScroll();
+
+    if (finePointer) {
+      const targets = $$('#hero-name, .section-head h2, .flag-title, .group-title, .hero-statement, .deck');
+      let active = null, units = [], raf = 0, px = -1e4, py = -1e4;
+      const arm = (el) => {
+        el.classList.add('dance');
+        $$('.ch, .wd', el).forEach((u) => {
+          const r = u.getBoundingClientRect();
+          units.push({ el: u, owner: el, x: r.left + r.width / 2 + window.scrollX, y: r.top + r.height / 2 + window.scrollY, f: 0, side: 1, letter: u.classList.contains('ch') });
+        });
+      };
+      const frame = () => {
+        const sx = window.scrollX, sy = window.scrollY;
+        units = units.filter((u) => {
+          let f = 0;
+          if (u.owner === active) {
+            const dx = px - (u.x - sx), dy = py - (u.y - sy), d = Math.hypot(dx, dy), reach = u.letter ? 170 : 120;
+            if (d < reach) { f = (1 - d / reach) ** 2; u.side = dx < 0 ? -1 : 1; }
+          }
+          u.f += (f - u.f) * 0.22;
+          if (u.owner !== active && u.f < 0.004) { u.el.style.transform = ''; return false; }
+          u.el.style.transform = u.letter
+            ? `translateY(${(-22 * u.f).toFixed(1)}px) scale(${(1 + 0.6 * u.f).toFixed(3)}) rotate(${(u.side * 8 * u.f).toFixed(1)}deg)`
+            : `translateY(${(-6 * u.f).toFixed(1)}px) scale(${(1 + 0.16 * u.f).toFixed(3)})`;
+          return true;
+        });
+        targets.forEach((t) => { if (t !== active && !units.some((u) => u.owner === t)) t.classList.remove('dance'); });
+        raf = units.length ? requestAnimationFrame(frame) : 0;
+      };
+      window.addEventListener('pointermove', (e) => {
+        px = e.clientX; py = e.clientY;
+        let hit = null;
+        for (const t of targets) {
+          const r = t.getBoundingClientRect();
+          if (px > r.left - 90 && px < r.right + 90 && py > r.top - 90 && py < r.bottom + 90) { hit = t; break; }
+        }
+        if (hit !== active) {
+          active = hit;
+          if (hit && !hit.classList.contains('ripple') && hit.closest('.in, #hero') && root.classList.contains('fx-in') && !units.some((u) => u.owner === hit)) arm(hit);
+        }
+        if (units.length && !raf) raf = requestAnimationFrame(frame);
+      }, { passive: true });
+    }
+
+    const name = $('#hero-name');
+    if (name) {
+      setInterval(() => {
+        const r = name.getBoundingClientRect();
+        if (document.hidden || r.bottom < 0 || r.top > window.innerHeight || name.classList.contains('dance') || !root.classList.contains('fx-in')) return;
+        name.classList.add('ripple');
+        setTimeout(() => name.classList.remove('ripple'), 1600);
+      }, 8000);
+    }
+  }
+
+  const main = $('#main');
+  if (main && !reduceMotion) {
+    let lastY = window.scrollY, lastT = performance.now(), skew = 0, target = 0, raf = 0;
+    const settle = () => {
+      skew += (target - skew) * 0.12;
+      target *= 0.85;
+      if (Math.abs(skew) < 0.02 && Math.abs(target) < 0.02) { main.style.transform = ''; raf = 0; return; }
+      main.style.transform = `skewY(${skew.toFixed(3)}deg)`;
+      raf = requestAnimationFrame(settle);
+    };
+    window.addEventListener('scroll', () => {
+      const now = performance.now(), y = window.scrollY;
+      const v = (y - lastY) / Math.max(16, now - lastT) * 16; // px per frame
+      lastY = y; lastT = now;
+      target = Math.max(-2.5, Math.min(2.5, v * 0.04));
+      if (!raf) raf = requestAnimationFrame(settle);
+    }, { passive: true });
+  }
+
+  /* ---------- cursor ring: follows a fine pointer and grows over links ---------- */
+  const ring = $('#cursor');
+  if (ring && !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.documentElement.classList.add('has-cursor');
+    let tx = -100, ty = -100, x = tx, y = ty, raf = 0;
+    const follow = () => {
+      x += (tx - x) * 0.35;
+      y += (ty - y) * 0.35;
+      ring.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
+      raf = (Math.abs(tx - x) + Math.abs(ty - y) > 0.2) ? requestAnimationFrame(follow) : 0;
+    };
+    window.addEventListener('pointermove', (e) => {
+      tx = e.clientX; ty = e.clientY;
+      ring.style.opacity = '1';
+      if (!raf) raf = requestAnimationFrame(follow);
+    }, { passive: true });
+    document.addEventListener('pointerover', (e) => ring.classList.toggle('on-link', !!e.target.closest('a, button')));
+    document.addEventListener('pointerleave', () => { ring.style.opacity = '0'; });
+    document.addEventListener('pointerdown', () => ring.classList.add('down'));
+    document.addEventListener('pointerup', () => ring.classList.remove('down'));
+  }
+
+  /* ---------- hero tape: a synthetic candlestick chart that draws itself once (also used by tools/og.html) ---------- */
   const tape = () => {
     const canvas = $('#tape');
     if (!canvas) return;
