@@ -18,11 +18,28 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
 
-RESUME_FILES = [
-    "resume/Vikas-Sharma-Software-Engineer.pdf", "resume/Vikas-Sharma-Software-Engineer.docx",
-    "resume/Vikas-Sharma-Python-Developer.pdf", "resume/Vikas-Sharma-Python-Developer.docx",
-    "resume/Vikas-Sharma-Quantitative-Developer.pdf", "resume/Vikas-Sharma-Quantitative-Developer.docx",
-]
+# one résumé on the public site: several role variants side by side read as unfocused to HR (owner, 2026-11-13)
+PUBLIC_RESUME = "resume/Vikas-Sharma-Software-Engineer.pdf"
+
+
+def _page_text():
+    import re
+    return re.sub(r"<[^>]+>", " ", (ROOT / "index.html").read_text(encoding="utf-8"))
+
+
+def test_site_tells_the_same_story_as_the_resumes():
+    # one full-time role since Jul 2023, internship in words, no invented level, no stale numbers
+    text = _page_text()
+    assert "Jul 2023" in text and "part-time intern" in text
+    for stale in ["Software Engineer II", "since January 2022", "Jan 2022", "Jul 2022", "Feb 2024",
+                  "1.0.6", "90 unit", "Parallel downloads", "connected client"]:
+        assert stale not in text, f"stale fact on the site: {stale!r}"
+
+
+def test_site_claims_only_what_he_has_built_and_used():
+    low = _page_text().lower()
+    for word in ["django", "flask", "fastapi", "pydantic", "expert", "pc-alerts"]:
+        assert word not in low, f"remove {word!r}"
 
 # JS helpers evaluated inside the page --------------------------------------
 
@@ -241,12 +258,18 @@ def test_projects_have_figures_with_captions(desktop):
     assert n >= 3, f"expected at least 3 captioned SVG figures in #projects, found {n}"
 
 
-def test_every_resume_variant_is_linked_and_present(desktop):
+def test_site_offers_exactly_one_resume(desktop):
     page, _ = desktop
     hrefs = page.evaluate("() => Array.from(document.querySelectorAll('a[href]')).map(a => a.getAttribute('href'))")
-    for f in RESUME_FILES:
-        assert (ROOT / f).exists(), f"missing file {f}"
-        assert f in hrefs, f"{f} is not linked anywhere on the page"
+    assert (ROOT / PUBLIC_RESUME).exists(), f"missing file {PUBLIC_RESUME}"
+    assert {h for h in hrefs if h.startswith("resume/")} == {PUBLIC_RESUME}
+
+
+def test_only_the_main_resume_is_published():
+    # the repo is public, so the role variants live in the git-ignored private/ folder
+    assert sorted(p.name for p in (ROOT / "resume").iterdir()) == [
+        "Vikas-Sharma-Software-Engineer.docx", "Vikas-Sharma-Software-Engineer.pdf"]
+    assert "private/" in (ROOT / ".gitignore").read_text(encoding="utf-8").split()
 
 
 def test_share_image_declared_and_present(desktop):

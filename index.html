@@ -89,7 +89,7 @@
             <h1 id="hero-name">Vikas<br />Sharma</h1>
             <p class="hero-statement">I build production software end to end: distributed systems, SDKs, data platforms, web apps, and the tools around them.</p>
             <p class="hero-bio">
-              Three-plus years at a fintech firm shipping Python systems that handle ₹400 Cr (about $48M) a day across 150+ connected clients, a 150× performance rewrite, ETL pipelines over 8+ years of tick data, monitoring stacks and internal tools. Author of <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener">pyzdata</a> on PyPI.
+              Three-plus years at a fintech startup building Python systems that handle ₹400 Cr (about $48M) a day across 150+ trading accounts, a 150× performance rewrite, ETL pipelines over 8+ years of tick data, monitoring stacks and internal tools. Author of <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener">pyzdata</a> on PyPI.
             </p>
             <div class="hero-actions">
               <a href="#projects" class="btn btn-primary">See selected work</a>
@@ -121,7 +121,7 @@
 
         <dl class="board" aria-label="Headline numbers">
           <div class="cell"><dt>Daily transaction volume, about $48M</dt><dd><span class="cur">₹</span>400 Cr+</dd></div>
-          <div class="cell"><dt>Connected client accounts on one platform</dt><dd>150+</dd></div>
+          <div class="cell"><dt>Trading accounts on one platform</dt><dd>150+</dd></div>
           <div class="cell"><dt>Faster after my performance rewrite</dt><dd>150×</dd></div>
           <div class="cell"><dt>GitHub stars across public projects</dt><dd><span data-gh="stars-total">64</span><span class="star">★</span></dd></div>
         </dl>
@@ -133,19 +133,19 @@
       <div class="container">
         <div class="section-head">
           <h2 id="about-title">About</h2>
-          <p class="deck">Three years shipping production systems at a fintech firm: platforms, pipelines, dashboards and tools.</p>
+          <p class="deck">Three-plus years building production systems at a fintech startup: platforms, pipelines, dashboards and tools.</p>
         </div>
 
         <div class="about-grid">
           <div class="prose">
             <p class="lead">
-              I'm a software engineer at a proprietary fintech firm, where I've spent 3+ years designing and building the production systems behind a trading desk: a distributed transaction platform, a message-passing microservice architecture, high-volume data pipelines, web apps and dashboards, and the monitoring and tooling around them.
+              I'm a software engineer at an algorithmic-trading fintech startup in New Delhi, where I've spent 3+ years building the production systems behind its trading desk: a transaction platform, a message-passing service on ZeroMQ, high-volume data pipelines, web dashboards, and the monitoring and tooling around them. I joined in 2022 as a part-time intern during college and went full-time after graduating in 2023.
             </p>
             <p>
-              My work sits where Python performance engineering, distributed systems and data engineering meet, with web and tooling work alongside. I've built an SDK that integrates three third-party REST and WebSocket APIs with real-time validation and reconciliation; a ZeroMQ hub-spoke system with CSV-backed state machines for crash recovery, running autonomously on AWS EC2; a batch engine rewritten from about 150 hours to under 1 hour; and ETL pipelines that turn 8+ years of tick-level data into Parquet, served through a Polars and DuckDB layer and Streamlit dashboards.
+              My work sits where Python performance engineering, distributed systems and data engineering meet, with web and tooling work alongside. I've built an SDK that integrates three third-party REST and WebSocket APIs with real-time validation and reconciliation; a ZeroMQ hub-spoke system with CSV-backed state machines for crash recovery, running autonomously on AWS EC2; PgcBacktest, a backtesting library rewritten from about 150 hours to under 1 hour; and ETL pipelines that turn 8+ years of tick-level data into Parquet, served through a Polars and DuckDB layer and Streamlit dashboards.
             </p>
             <p>
-              Outside work I maintain <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener">pyzdata</a>, an open-source Python library, CLI and web app on PyPI, along with an unofficial Zerodha Kite client adopted by the Indian retail trading community and a set of Windows productivity tools. Long-form reading tilts toward systems and markets: <em>Designing Data-Intensive Applications</em>, <em>Options as a Strategic Investment</em>, <em>Atomic Habits</em>.
+              Outside work I maintain <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener">pyzdata</a>, an open-source Python library, CLI and web app on PyPI, along with an unofficial Zerodha Kite client used by Indian retail algo traders and a set of Windows productivity tools. Long-form reading tilts toward systems and markets: <em>Designing Data-Intensive Applications</em>, <em>Options as a Strategic Investment</em>, <em>Atomic Habits</em>.
             </p>
           </div>
 
@@ -159,7 +159,7 @@
               <div class="t-out">software engineer, 3+ years, New Delhi</div>
               <div class="t-line"><span class="t-prompt">$</span> cat profile.json</div>
 <pre class="t-json">{
-  <span class="k">"role"</span>: <span class="v">"Software Engineer II"</span>,
+  <span class="k">"role"</span>: <span class="v">"Software Engineer"</span>,
   <span class="k">"timezone"</span>: <span class="v">"UTC+05:30"</span>,
   <span class="k">"builds"</span>: [
     <span class="v">"distributed systems"</span>, <span class="v">"SDKs"</span>,
@@ -169,7 +169,7 @@
   <span class="k">"languages"</span>: [
     <span class="v">"Python"</span>, <span class="v">"C++"</span>, <span class="v">"SQL"</span>, <span class="v">"Bash"</span>
   ],
-  <span class="k">"pypi"</span>: <span class="v">"pyzdata@<span data-pypi>1.0.6</span>"</span>,
+  <span class="k">"pypi"</span>: <span class="v">"pyzdata@<span data-pypi>1.2.0</span>"</span>,
   <span class="k">"status"</span>: <span class="v">"open to new roles"</span>
 }</pre>
               <div class="t-line"><span class="t-prompt">$</span> <span class="caret" aria-hidden="true"></span></div>
@@ -184,52 +184,24 @@
       <div class="container">
         <div class="section-head">
           <h2 id="work-title">Work</h2>
-          <p class="deck">Intern to Software Engineer II at a proprietary fintech firm, since January 2022.</p>
+          <p class="deck">Software engineer at a fintech startup since July 2023, after joining as a part-time intern during college.</p>
         </div>
 
         <ol class="timeline">
           <li class="tl-item">
-            <div class="tl-date"><time datetime="2024-02">Feb 2024</time> to present</div>
-            <div class="tl-body">
-              <h3 class="tl-role">Software Engineer II</h3>
-              <p class="tl-org"><a href="https://www.linkedin.com/company/pranjali-growcap-private-limited" target="_blank" rel="noopener">Pranjali Growcap</a>, high-throughput transaction processing for Indian and US markets</p>
-              <ul class="tl-list">
-                <li><strong>Distributed transaction platform.</strong> Python SDK serving <b>150+ connected clients with ₹400+ Cr ($48M) in daily volume</b>: real-time validation, reconciliation, P&amp;L and audit trails across 3 third-party REST and WebSocket integrations (Zerodha, IBKR, XTS). Eliminated 100% of manual workflows.</li>
-                <li><strong>Microservice architecture.</strong> <b>ZeroMQ hub-spoke system</b>: a central broker coordinating 5 independent worker processes by asynchronous message passing, CSV-backed state machines for crash recovery and idempotent restarts, fully autonomous on AWS EC2.</li>
-                <li><strong>Performance engineering.</strong> Rebuilt a data-intensive batch engine with NumPy vectorization, O(log n) binary-search lookups and 16-way parallel orchestration over FileLock: <b>about 150 hours to under 1 hour</b>.</li>
-                <li><strong>High-volume data pipelines.</strong> ETL over <b>8+ years of tick-level data</b> into columnar Parquet, served through a Polars and DuckDB analytics layer and Streamlit dashboards; 50,000+ job combinations per cycle.</li>
-                <li><strong>Fault tolerance.</strong> Crash-recovery subsystem with CSV state machines and file-backed idempotency tokens, so automated restarts never duplicate work or lose state downstream.</li>
-              </ul>
-              <ul class="tags" aria-label="Technologies">
-                <li>Python</li><li>NumPy</li><li>Polars</li><li>DuckDB</li><li>ZeroMQ</li><li>AsyncIO</li><li>AWS EC2</li><li>Docker</li><li>Streamlit</li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="tl-item">
-            <div class="tl-date"><time datetime="2022-07">Jul 2022</time> to <time datetime="2024-01">Jan 2024</time></div>
+            <div class="tl-date"><time datetime="2023-07">Jul 2023</time> to present</div>
             <div class="tl-body">
               <h3 class="tl-role">Software Engineer</h3>
-              <p class="tl-org">Pranjali Growcap, foundational platform work</p>
+              <p class="tl-org"><a href="https://www.linkedin.com/company/pranjali-growcap-private-limited" target="_blank" rel="noopener">Pranjali Growcap</a>, fintech startup in algorithmic trading for Indian and US markets. Joined in 2022 as a part-time intern during college.</p>
               <ul class="tl-list">
-                <li>Built <b>v1 of the firm's platform SDK</b>, integrating multiple third-party REST and WebSocket APIs with real-time streaming, session management and automated retry logic.</li>
-                <li>Developed a <b>reproducible in-house data-analysis framework</b> that replaced ad-hoc spreadsheet workflows across teams.</li>
-                <li>Shipped the monitoring and alerting stack (Streamlit and Telegram bots) for real-time dashboards, alerts and system-health checks, used daily.</li>
-                <li>Designed ETL pipelines for cleaning and structuring high-volume upstream data feeds.</li>
+                <li><strong>Transaction platform.</strong> Built the company's Python SDK, starting with version 1. It places, checks and reconciles orders for <b>150+ trading accounts, about ₹400 Cr ($48M) a day</b>, through 3 external REST and WebSocket APIs, with P&amp;L tracking and audit logs, replacing a fully manual process.</li>
+                <li><strong>Message-based service.</strong> A <b>ZeroMQ hub-spoke system</b>: a central broker and 5 worker processes that save their state to disk, so they resume after a crash without repeating work. Runs unattended on AWS EC2.</li>
+                <li><strong>Backtesting library (PgcBacktest).</strong> Rewrote the company's pip-installable backtesting library with NumPy vectorization and binary search, spread over 16 parallel workers: a run of 50,000+ parameter combinations went from <b>about 150 hours to under 1 hour</b>.</li>
+                <li><strong>Data pipelines and dashboards.</strong> ETL over <b>8+ years of market data</b> into Parquet, a Polars and DuckDB query layer, and Streamlit and Plotly dashboards with heatmaps, filters and Excel export.</li>
+                <li><strong>Monitoring and tools.</strong> Telegram alert bots and Streamlit dashboards for real-time system health, used by the team every day, and internal tools that replaced spreadsheet workflows.</li>
               </ul>
               <ul class="tags" aria-label="Technologies">
-                <li>Python</li><li>Pandas</li><li>REST APIs</li><li>WebSocket</li><li>Streamlit</li><li>Telegram API</li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="tl-item">
-            <div class="tl-date"><time datetime="2022-01">Jan 2022</time> to <time datetime="2022-06">Jun 2022</time></div>
-            <div class="tl-body">
-              <h3 class="tl-role">Data Analyst Intern</h3>
-              <p class="tl-org">Pranjali Growcap</p>
-              <ul class="tl-list">
-                <li>Built data-cleaning pipelines for NSE and BSE feeds and contributed pattern-recognition research that fed early strategies.</li>
+                <li>Python</li><li>NumPy</li><li>Polars</li><li>DuckDB</li><li>ZeroMQ</li><li>REST APIs</li><li>AWS EC2</li><li>Docker</li><li>Streamlit</li>
               </ul>
             </div>
           </li>
@@ -260,7 +232,7 @@
           <div class="flag-grid">
             <div>
               <p class="flag-desc">
-                Download OHLCV and open-interest data for any NSE, BSE, NFO or MCX instrument at intervals from 1 minute to daily. Parallel downloads, disk caching, rate limiting, retries and a typed exception hierarchy. Package engineering: 90 unit tests, PEP 561 typing, semantic versioning, Python 3.10 to 3.13, and trusted publishing through GitHub Actions with Sigstore-signed releases.
+                Download OHLCV and open-interest data for any NSE, BSE, NFO or MCX instrument at intervals from 1 minute to daily. Disk caching, rate limiting, retries and a typed exception hierarchy. Package engineering: 159 unit tests, PEP 561 typing, semantic versioning, Python 3.10 to 3.13, and trusted publishing through GitHub Actions with Sigstore-signed releases.
               </p>
               <button class="install" id="install" type="button" aria-label="Copy the pip install command">
                 <span class="install-prompt" aria-hidden="true">$</span>
@@ -272,11 +244,11 @@
               </ul>
             </div>
             <dl class="flag-stats">
-              <div><dt>Version</dt><dd data-pypi>1.0.6</dd></div>
+              <div><dt>Version</dt><dd data-pypi>1.2.0</dd></div>
               <div><dt>Status</dt><dd>Production / Stable</dd></div>
-              <div><dt>Stars</dt><dd><span data-gh="stars:Historical-Market-data-From-Zerodha">32</span>★</dd></div>
-              <div><dt>Forks</dt><dd data-gh="forks:Historical-Market-data-From-Zerodha">15</dd></div>
-              <div><dt>Tests</dt><dd>90 unit</dd></div>
+              <div><dt>Stars</dt><dd><span data-gh="stars:Historical-Market-data-From-Zerodha">34</span>★</dd></div>
+              <div><dt>Forks</dt><dd data-gh="forks:Historical-Market-data-From-Zerodha">16</dd></div>
+              <div><dt>Tests</dt><dd>159 unit</dd></div>
               <div><dt>License</dt><dd>MIT</dd></div>
             </dl>
           </div>
@@ -330,7 +302,7 @@
             <p>Hub-spoke architecture: a central broker, TWSMasterHub, holds the single upstream session while five independent worker processes communicate by asynchronous message passing. CSV-backed state machines give crash recovery and idempotent restarts; smart request routing adds retries and stale-response detection. Runs autonomously on AWS EC2 with IBC-managed restarts, driving the firm's US options strategies end to end.</p>
             <dl class="metrics">
               <div><dt>worker processes</dt><dd>5</dd></div>
-              <div><dt>autonomous</dt><dd>24/7</dd></div>
+              <div><dt>upstream session</dt><dd>1</dd></div>
               <div><dt>manual interventions</dt><dd>0</dd></div>
             </dl>
             <ul class="tags" aria-label="Technologies"><li>Python 3.12</li><li>ZeroMQ</li><li>ib_async</li><li>AWS EC2</li><li>IBC</li></ul>
@@ -393,14 +365,14 @@
               <rect class="box" x="346" y="92" width="106" height="36" rx="6"/><text class="lbl" x="399" y="115" text-anchor="middle">IBKR</text>
               <rect class="box" x="346" y="144" width="106" height="36" rx="6"/><text class="lbl" x="399" y="167" text-anchor="middle">XTS</text>
             </svg>
-            <figcaption>Signals in, orders out, fills back: one SDK drives three third-party integrations and reconciles positions and P&amp;L across every client account.</figcaption>
+            <figcaption>Signals in, orders out, fills back: one SDK drives three third-party integrations and reconciles positions and P&amp;L across every trading account.</figcaption>
           </figure>
           <div class="system-copy">
             <h4 class="system-title">Multi-broker transaction platform</h4>
             <p>Python SDK automating the full transaction lifecycle across three third-party REST and WebSocket integrations (Zerodha, IBKR and XTS): signal intake, order placement, real-time risk checks, position reconciliation, P&amp;L and end-to-end audit trails. Eliminated 100% of manual order flow.</p>
             <dl class="metrics">
               <div><dt>daily volume</dt><dd>₹400 Cr+</dd></div>
-              <div><dt>client accounts</dt><dd>150+</dd></div>
+              <div><dt>trading accounts</dt><dd>150+</dd></div>
               <div><dt>integrations</dt><dd>3</dd></div>
             </dl>
             <ul class="tags" aria-label="Technologies"><li>Python</li><li>REST APIs</li><li>WebSocket</li><li>Multithreading</li><li>Zerodha Kite</li><li>IBKR</li><li>XTS</li></ul>
@@ -411,8 +383,8 @@
         <ul class="more">
           <li>
             <h4><a href="https://github.com/vikassharma545/KiteWeb" target="_blank" rel="noopener">KiteWeb<svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></h4>
-            <p class="more-meta">Source available, <span data-gh="stars:KiteWeb">28</span> stars, <span data-gh="forks:KiteWeb">9</span> forks</p>
-            <p>Unofficial Python client for Zerodha Kite's web endpoints: authentication, session management, and order and market-data calls. Built for learning and personal automation, and adopted across the Indian retail algorithmic-trading community.</p>
+            <p class="more-meta">Source available, <span data-gh="stars:KiteWeb">27</span> stars, <span data-gh="forks:KiteWeb">11</span> forks</p>
+            <p>Unofficial Python client for Zerodha Kite's web endpoints: authentication, session management, and order and market-data calls. Built for learning and personal automation, and used by Indian retail algo traders.</p>
           </li>
           <li>
             <h4><a href="https://github.com/vikassharma545/Jupyter-Notebook" target="_blank" rel="noopener">Developer productivity tools<svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></h4>
@@ -442,8 +414,8 @@
         </div>
 
         <dl class="stack">
-          <div class="stack-row"><dt>Languages</dt><dd><ul class="chips"><li>Python <span class="note">expert</span></li><li>C++</li><li>SQL</li><li>Bash</li></ul></dd></div>
-          <div class="stack-row"><dt>Backend and web</dt><dd><ul class="chips"><li>Django</li><li>Flask</li><li>FastAPI</li><li>Streamlit</li><li>REST API design</li><li>WebSocket</li><li>Pydantic</li><li>pytest</li><li>Selenium</li></ul></dd></div>
+          <div class="stack-row"><dt>Languages</dt><dd><ul class="chips"><li>Python</li><li>C++</li><li>SQL</li><li>Bash</li></ul></dd></div>
+          <div class="stack-row"><dt>Backend and web</dt><dd><ul class="chips"><li>REST APIs</li><li>WebSocket</li><li>requests</li><li>Streamlit</li><li>pytest</li><li>Selenium</li></ul></dd></div>
           <div class="stack-row"><dt>Apps and interfaces</dt><dd><ul class="chips"><li>Streamlit apps</li><li>Plotly dashboards</li><li>Tkinter dialogs</li><li>Windows context menus</li><li>System-tray apps</li><li>File associations</li><li>Telegram bots</li><li>Static HTML pages</li></ul></dd></div>
           <div class="stack-row"><dt>Distributed systems</dt><dd><ul class="chips"><li>ZeroMQ</li><li>Microservices</li><li>Message passing</li><li>State machines</li><li>AsyncIO</li><li>Multiprocessing</li><li>Multithreading</li><li>FileLock orchestration</li></ul></dd></div>
           <div class="stack-row"><dt>Data engineering</dt><dd><ul class="chips"><li>NumPy</li><li>Polars</li><li>Pandas</li><li>DuckDB</li><li>Parquet</li><li>Numba</li><li>Dask</li><li>ETL pipelines</li><li>Plotly</li></ul></dd></div>
@@ -468,7 +440,7 @@
       <div class="container">
         <div class="section-head">
           <h2 id="contact-title">Contact</h2>
-          <p class="deck">Open to software engineering roles: backend and Python development, distributed systems and data platforms, and quantitative development. Full-time or contract; open-source collaborations welcome.</p>
+          <p class="deck">Open to software engineering roles in backend, Python and data engineering. Full-time, in Delhi NCR or remote.</p>
         </div>
 
         <div class="contact-grid">
@@ -490,11 +462,9 @@
           </div>
 
           <div class="resumes">
-            <h3 class="resumes-title">Résumé, pick the version that fits the role, as PDF or Word</h3>
+            <h3 class="resumes-title">Résumé</h3>
             <ul class="resume-list">
-              <li><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg><span class="rl-name">Software engineer</span><a href="resume/Vikas-Sharma-Software-Engineer.pdf" download>PDF</a><a href="resume/Vikas-Sharma-Software-Engineer.docx" download>Word</a></li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg><span class="rl-name">Python developer</span><a href="resume/Vikas-Sharma-Python-Developer.pdf" download>PDF</a><a href="resume/Vikas-Sharma-Python-Developer.docx" download>Word</a></li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg><span class="rl-name">Quantitative developer</span><a href="resume/Vikas-Sharma-Quantitative-Developer.pdf" download>PDF</a><a href="resume/Vikas-Sharma-Quantitative-Developer.docx" download>Word</a></li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg><span class="rl-name">Software engineer, one page</span><a href="resume/Vikas-Sharma-Software-Engineer.pdf" download>PDF</a></li>
             </ul>
           </div>
         </div>
