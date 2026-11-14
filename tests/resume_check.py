@@ -160,10 +160,10 @@ def test_education_date_on_the_degree_line(resume):
 
 
 def test_mysql_claim_backed_by_certificates(resume):
-    # MySQL comes from his Udemy MySQL Bootcamp and HackerRank SQL certificates, so a page claiming it shows them,
-    # and HackerRank is named once (twice reads as padding)
+    # a MySQL claim needs evidence: his production use in the trading SDK (named in the experience section),
+    # or his Udemy MySQL Bootcamp and HackerRank SQL certificates; HackerRank is named once (twice reads as padding)
     text = _text(resume)
-    if "MySQL" in text:
+    if "MySQL" in text and "MySQL" not in _experience(text):
         assert "CERTIFICATIONS" in [p.strip() for p in text.splitlines()], "MySQL claimed without the certificates"
     assert text.count("HackerRank") <= 1, "HackerRank listed twice"
 

@@ -89,7 +89,7 @@
             <h1 id="hero-name">Vikas<br />Sharma</h1>
             <p class="hero-statement">I build production software end to end: distributed systems, SDKs, data platforms, web apps, and the tools around them.</p>
             <p class="hero-bio">
-              Three-plus years at a fintech startup building Python systems that handle ₹400 Cr (about $48M) a day across 150+ trading accounts, a 150× performance rewrite, ETL pipelines over 8+ years of tick data, monitoring stacks and internal tools. Author of <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener">pyzdata</a> on PyPI.
+              Three-plus years at a fintech startup building Python systems that have handled up to ₹400 Cr (about $48M) a day across 150+ trading accounts, a 150× performance rewrite, ETL pipelines over 8+ years of tick data, monitoring stacks and internal tools. Author of <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener">pyzdata</a> on PyPI.
             </p>
             <div class="hero-actions">
               <a href="#projects" class="btn btn-primary">See selected work</a>
@@ -120,8 +120,8 @@
         </div>
 
         <dl class="board" aria-label="Headline numbers">
-          <div class="cell"><dt>Daily transaction volume, about $48M</dt><dd><span class="cur">₹</span>400 Cr+</dd></div>
-          <div class="cell"><dt>Trading accounts on one platform</dt><dd>150+</dd></div>
+          <div class="cell"><dt>Peak daily transaction volume, about $48M</dt><dd><span class="cur">₹</span>400 Cr+</dd></div>
+          <div class="cell"><dt>Trading accounts on one platform, at peak</dt><dd>150+</dd></div>
           <div class="cell"><dt>Faster after my performance rewrite</dt><dd>150×</dd></div>
           <div class="cell"><dt>GitHub stars across public projects</dt><dd><span data-gh="stars-total">64</span><span class="star">★</span></dd></div>
         </dl>
@@ -142,7 +142,7 @@
               I'm a software engineer at an algorithmic-trading fintech startup in New Delhi, where I've spent 3+ years building the production systems behind its trading desk: a transaction platform, a message-passing service on ZeroMQ, high-volume data pipelines, web dashboards, and the monitoring and tooling around them. I joined in 2022 as a part-time intern during college and went full-time after graduating in 2023.
             </p>
             <p>
-              My work sits where Python performance engineering, distributed systems and data engineering meet, with web and tooling work alongside. I've built an SDK that integrates three third-party REST and WebSocket APIs with real-time validation and reconciliation; a ZeroMQ hub-spoke system with CSV-backed state machines for crash recovery, running autonomously on AWS EC2; PgcBacktest, a backtesting library rewritten from about 150 hours to under 1 hour; and ETL pipelines that turn 8+ years of tick-level data into Parquet, served through a Polars and DuckDB layer and Streamlit dashboards.
+              My work sits where Python performance engineering, distributed systems and data engineering meet, with web and tooling work alongside. I've built an SDK that integrates three third-party REST and WebSocket APIs with real-time validation and reconciliation, its own rate-limiter service and automatic feed failover; a ZeroMQ hub-spoke system with CSV-backed state machines for crash recovery, running autonomously on AWS EC2; PgcBacktest, a backtesting library rewritten from about 150 hours to under 1 hour; and ETL pipelines that turn 8+ years of tick-level data into Parquet, served through a Polars and DuckDB layer and Streamlit dashboards.
             </p>
             <p>
               Outside work I maintain <a href="https://pypi.org/project/pyzdata/" target="_blank" rel="noopener">pyzdata</a>, an open-source Python library, CLI and web app on PyPI, along with an unofficial Zerodha Kite client used by Indian retail algo traders and a set of Windows productivity tools. Long-form reading tilts toward systems and markets: <em>Designing Data-Intensive Applications</em>, <em>Options as a Strategic Investment</em>, <em>Atomic Habits</em>.
@@ -194,7 +194,7 @@
               <h3 class="tl-role">Software Engineer</h3>
               <p class="tl-org"><a href="https://www.linkedin.com/company/pranjali-growcap-private-limited" target="_blank" rel="noopener">Pranjali Growcap</a>, fintech startup in algorithmic trading for Indian and US markets. Joined in 2022 as a part-time intern during college.</p>
               <ul class="tl-list">
-                <li><strong>Transaction platform.</strong> Built the company's Python SDK, starting with version 1. It places, checks and reconciles orders for <b>150+ trading accounts, about ₹400 Cr ($48M) a day</b>, through 3 external REST and WebSocket APIs, with P&amp;L tracking and audit logs, replacing a fully manual process.</li>
+                <li><strong>Transaction platform.</strong> Built the company's Python SDK, starting with version 1. It places, checks and reconciles orders for <b>150+ trading accounts at its peak, about ₹400 Cr ($48M) a day</b>, through 3 external REST and WebSocket APIs, with P&amp;L tracking and audit logs, replacing a fully manual process. Under the hood: a standalone <b>rate-limiter service</b> with per-account queues, retries with randomized backoff, <b>Socket.IO streams</b> of market data and order updates stored in MySQL, and automatic feed failover.</li>
                 <li><strong>Message-based service.</strong> A <b>ZeroMQ hub-spoke system</b>: a central broker and 5 worker processes that save their state to disk, so they resume after a crash without repeating work. Runs unattended on AWS EC2.</li>
                 <li><strong>Backtesting library (PgcBacktest).</strong> Rewrote the company's pip-installable backtesting library with NumPy vectorization and binary search, spread over 16 parallel workers: a run of 50,000+ parameter combinations went from <b>about 150 hours to under 1 hour</b>.</li>
                 <li><strong>Data pipelines and dashboards.</strong> ETL over <b>8+ years of market data</b> into Parquet, a Polars and DuckDB query layer, and Streamlit and Plotly dashboards with heatmaps, filters and Excel export.</li>
@@ -339,7 +339,7 @@
         <!-- System 3: transaction platform -->
         <article class="system">
           <figure class="fig">
-            <svg viewBox="0 0 460 220" role="img" aria-label="Diagram: signals enter the SDK, which places orders with and receives fills from three third-party integrations: Zerodha Kite, IBKR, and XTS.">
+            <svg viewBox="0 0 460 220" role="img" aria-label="Diagram: signals enter the SDK, which places orders with and receives fills from three third-party integrations: Zerodha Kite, IBKR, and XTS. Inside the SDK: order placement, real-time risk checks, reconciliation and P&amp;L, audit trails, a rate limiter with retries, and Socket.IO streams.">
               <defs>
                 <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
               </defs>
@@ -349,12 +349,14 @@
 
               <line class="edge" x1="120" y1="110" x2="150" y2="110" marker-end="url(#arr3)"/>
 
-              <rect class="box box-hot" x="152" y="56" width="164" height="108" rx="6"/>
-              <text class="lbl" x="234" y="80" text-anchor="middle">Platform SDK</text>
-              <text class="sub" x="234" y="102" text-anchor="middle">order placement</text>
-              <text class="sub" x="234" y="119" text-anchor="middle">real-time risk checks</text>
-              <text class="sub" x="234" y="136" text-anchor="middle">reconciliation, P&amp;L</text>
-              <text class="sub" x="234" y="153" text-anchor="middle">audit trails</text>
+              <rect class="box box-hot" x="152" y="36" width="164" height="148" rx="6"/>
+              <text class="lbl" x="234" y="58" text-anchor="middle">Platform SDK</text>
+              <text class="sub" x="234" y="80" text-anchor="middle">order placement</text>
+              <text class="sub" x="234" y="97" text-anchor="middle">real-time risk checks</text>
+              <text class="sub" x="234" y="114" text-anchor="middle">reconciliation, P&amp;L</text>
+              <text class="sub" x="234" y="131" text-anchor="middle">audit trails</text>
+              <text class="sub" x="234" y="148" text-anchor="middle">rate limiter, retries</text>
+              <text class="sub" x="234" y="165" text-anchor="middle">Socket.IO streams</text>
 
               <text class="sub" x="380" y="28" text-anchor="middle">orders out, fills back</text>
               <line class="edge" x1="316" y1="96" x2="344" y2="58" marker-start="url(#arr3)" marker-end="url(#arr3)"/>
@@ -365,17 +367,18 @@
               <rect class="box" x="346" y="92" width="106" height="36" rx="6"/><text class="lbl" x="399" y="115" text-anchor="middle">IBKR</text>
               <rect class="box" x="346" y="144" width="106" height="36" rx="6"/><text class="lbl" x="399" y="167" text-anchor="middle">XTS</text>
             </svg>
-            <figcaption>Signals in, orders out, fills back: one SDK drives three third-party integrations and reconciles positions and P&amp;L across every trading account.</figcaption>
+            <figcaption>Signals in, orders out, fills back: one SDK drives three third-party integrations and reconciles positions and P&amp;L across every trading account. A rate limiter keeps each account within broker limits, and Socket.IO streams keep live prices and order states in MySQL.</figcaption>
           </figure>
           <div class="system-copy">
             <h4 class="system-title">Multi-broker transaction platform</h4>
             <p>Python SDK automating the full transaction lifecycle across three third-party REST and WebSocket integrations (Zerodha, IBKR and XTS): signal intake, order placement, real-time risk checks, position reconciliation, P&amp;L and end-to-end audit trails. Eliminated 100% of manual order flow.</p>
+            <p>How it works: a standalone rate-limiter service (TCP, per-account queues and worker threads) keeps every account within its broker's per-second limits, and throttled calls retry with randomized backoff. Socket.IO streams decode binary market data and order updates into MySQL through connection pools, so strategies read live state without polling, and the price feed fails over to another account when it goes stale. Freeze-quantity order slicing, limit-price chasing, rejection recovery and kill switches complete the execution layer.</p>
             <dl class="metrics">
-              <div><dt>daily volume</dt><dd>₹400 Cr+</dd></div>
-              <div><dt>trading accounts</dt><dd>150+</dd></div>
+              <div><dt>peak daily volume</dt><dd>₹400 Cr+</dd></div>
+              <div><dt>trading accounts at peak</dt><dd>150+</dd></div>
               <div><dt>integrations</dt><dd>3</dd></div>
             </dl>
-            <ul class="tags" aria-label="Technologies"><li>Python</li><li>REST APIs</li><li>WebSocket</li><li>Multithreading</li><li>Zerodha Kite</li><li>IBKR</li><li>XTS</li></ul>
+            <ul class="tags" aria-label="Technologies"><li>Python</li><li>REST APIs</li><li>WebSocket</li><li>Socket.IO</li><li>Multithreading</li><li>MySQL</li><li>Rate limiting</li><li>Zerodha Kite</li><li>IBKR</li><li>XTS</li></ul>
           </div>
         </article>
 
